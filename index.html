@@ -635,17 +635,7 @@ footer{background:var(--navy-dark);padding:56px 60px;}
 let cur = null;
 
 // NETLIFY IDENTITY
-netlifyIdentity.init();
-
-netlifyIdentity.on('init', user => {
-  if (!user && window.location.hash && (
-    window.location.hash.includes('invite_token') ||
-    window.location.hash.includes('confirmation_token') ||
-    window.location.hash.includes('recovery_token')
-  )) {
-    netlifyIdentity.open();
-  }
-});
+netlifyIdentity.init({ APIUrl: 'https://usholding.kz/.netlify/identity' });
 
 netlifyIdentity.on('login', user => {
   const meta = user.user_metadata || {};
