@@ -311,7 +311,6 @@ footer{background:var(--navy-dark);padding:56px 60px;}
   .agrow{grid-template-columns:1fr;}
 }
 </style>
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
 
@@ -630,12 +629,13 @@ footer{background:var(--navy-dark);padding:56px 60px;}
 </div>
 
 <!-- AUTH MODAL -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script>
 // STORAGE
 let cur = null;
 
 // NETLIFY IDENTITY
-netlifyIdentity.init({ APIUrl: 'https://usholding.kz/.netlify/identity' });
+netlifyIdentity.init();
 
 netlifyIdentity.on('login', user => {
   const meta = user.user_metadata || {};
