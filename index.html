@@ -489,9 +489,11 @@ footer{background:var(--navy-dark);padding:56px 60px;}
   </div>
   <div class="cform reveal">
     <h3>Оставить заявку</h3>
-    <form id="contactForm" name="contact" netlify data-netlify="true" netlify-honeypot="bot-field" novalidate>
-      <input type="hidden" name="form-name" value="contact">
-      <input type="hidden" name="bot-field" style="display:none">
+    <form id="contactForm" novalidate>
+      <input type="hidden" name="access_key" value="bce70d0b-dc4c-405a-90f4-09c84959d4a0">
+      <input type="hidden" name="subject" value="Новая заявка с сайта US Holding">
+      <input type="hidden" name="from_name" value="US Holding Site">
+      <input type="hidden" name="botcheck" style="display:none">
       <div class="frow">
         <div class="fg"><label>Имя *</label><input type="text" name="name" placeholder="Ваше имя" required></div>
         <div class="fg"><label>Компания</label><input type="text" name="company" placeholder="Название компании"></div>
@@ -758,10 +760,10 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
   btn.disabled = true;
   btn.textContent = 'Отправка...';
   const data = new FormData(form);
-  fetch('/', {
+  fetch('https://api.web3forms.com/submit', {
     method: 'POST',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    body: new URLSearchParams(data).toString()
+    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+    body: JSON.stringify(Object.fromEntries(data))
   })
   .then(() => {
     form.style.display = 'none';
