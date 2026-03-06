@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>US Holding — Группа компаний</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#1B3A6B; --navy-dark:#122952; --navy-mid:#234987; --navy-light:#2E5FA3;
+  --orange:#E8923A; --orange-light:#F0A855; --orange-dark:#C87820;
+  --white:#FFFFFF; --off-white:#F7F8FA; --light-bg:#EEF2F8;
+  --gray:#6B7A99; --gray-light:#9BA8BF; --gray-border:#D8E0EE;
+  --text:#1A2438; --text-light:#4A5568;
+  --shadow:0 4px 24px rgba(27,58,107,0.10); --shadow-lg:0 8px 40px rgba(27,58,107,0.15);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Raleway',sans-serif;color:var(--text);background:var(--white);overflow-x:hidden;}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-thumb{background:var(--navy-light);border-radius:3px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:14px 60px;background:rgba(255,255,255,0.98);border-bottom:1px solid var(--gray-border);box-shadow:0 2px 16px rgba(27,58,107,0.08);}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer;}
+.nav-logo-img{height:38px;width:auto;display:block;}
+.co-logo-img{width:auto;max-width:100%;max-height:48px;object-fit:contain;object-position:left center;display:block;margin-bottom:10px;}
+.logo-icon{width:42px;height:42px;background:var(--navy);border-radius:10px;border:2px solid var(--orange);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px;}
+.logo-text{font-family:'Playfair Display',serif;font-size:21px;font-weight:600;color:var(--navy);}
+.logo-text span{color:var(--orange);}
+.nav-links{display:flex;gap:4px;list-style:none;}
+.nav-links a{padding:8px 14px;border-radius:6px;color:var(--text-light);text-decoration:none;font-size:13px;font-weight:500;transition:all .2s;}
+.nav-links a:hover{background:var(--light-bg);color:var(--navy);}
+.nav-right{display:flex;gap:10px;align-items:center;}
+.btn-login{padding:9px 20px;border-radius:8px;border:1.5px solid var(--navy);background:transparent;color:var(--navy);font-family:'Raleway',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;}
+.btn-login:hover{background:var(--navy);color:#fff;}
+.btn-primary-nav{padding:9px 20px;border-radius:8px;background:var(--orange);color:#fff;border:none;font-family:'Raleway',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;}
+.btn-primary-nav:hover{background:var(--orange-dark);}
+.btn-mail-nav{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:8px;background:var(--light-bg);border:1.5px solid var(--gray-border);color:var(--navy);font-family:'Raleway',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;}
+.btn-mail-nav:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+.mail-icon{font-size:14px;}
+
+/* USER MENU */
+.user-menu{position:relative;}
+.user-btn{display:flex;align-items:center;gap:8px;padding:7px 14px;border-radius:8px;background:var(--light-bg);border:1.5px solid var(--gray-border);cursor:pointer;transition:all .2s;font-family:'Raleway',sans-serif;}
+.user-btn:hover{background:var(--gray-border);}
+.user-avatar{width:30px;height:30px;border-radius:7px;background:var(--navy);border:2px solid var(--orange);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;}
+.user-name{font-size:13px;font-weight:600;color:var(--navy);}
+.user-dropdown{position:absolute;top:calc(100% + 8px);right:0;background:#fff;border-radius:12px;box-shadow:var(--shadow-lg);border:1px solid var(--gray-border);min-width:210px;overflow:hidden;display:none;z-index:300;}
+.user-dropdown.open{display:block;}
+.udrop-header{padding:14px 18px;background:var(--light-bg);border-bottom:1px solid var(--gray-border);}
+.udrop-name{font-size:14px;font-weight:700;color:var(--navy);}
+.udrop-email{font-size:11px;color:var(--gray);margin-top:2px;}
+.ditem{display:flex;align-items:center;gap:10px;padding:11px 18px;cursor:pointer;transition:background .15s;font-size:13px;color:var(--text);text-decoration:none;border:none;background:none;width:100%;font-family:'Raleway',sans-serif;text-align:left;}
+.ditem:hover{background:var(--off-white);}
+.ditem.mail{color:var(--navy);font-weight:600;}
+.ditem.danger{color:#E53E3E;}
+.ditem.danger:hover{background:#FFF5F5;}
+.ddivider{height:1px;background:var(--gray-border);}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:100px 60px 60px;background:linear-gradient(135deg,var(--navy-dark) 0%,var(--navy) 55%,var(--navy-mid) 100%);position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:url('images/astana.jpg') center/cover no-repeat;opacity:.1;}
+.hero-pattern{position:absolute;inset:0;background:radial-gradient(circle at 15% 85%,rgba(232,146,58,.18) 0%,transparent 50%),radial-gradient(circle at 85% 15%,rgba(255,255,255,.04) 0%,transparent 50%);}
+.hero-content{position:relative;z-index:1;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(232,146,58,.15);border:1px solid rgba(232,146,58,.4);color:var(--orange-light);padding:6px 16px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:28px;animation:fadeUp .8s .2s ease both;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(40px,5vw,70px);font-weight:600;color:#fff;line-height:1.1;margin-bottom:24px;animation:fadeUp .8s .4s ease both;}
+.hero-title span{color:var(--orange-light);}
+.hero-desc{font-size:15px;line-height:1.8;color:rgba(255,255,255,.75);max-width:480px;margin-bottom:40px;animation:fadeUp .8s .6s ease both;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp .8s .8s ease both;}
+.btn-hp{padding:14px 30px;background:var(--orange);color:#fff;border:none;border-radius:8px;font-family:'Raleway',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block;}
+.btn-hp:hover{background:var(--orange-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,146,58,.4);}
+.btn-hg{padding:14px 30px;background:rgba(255,255,255,.1);color:#fff;border:1.5px solid rgba(255,255,255,.3);border-radius:8px;font-family:'Raleway',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block;}
+.btn-hg:hover{background:rgba(255,255,255,.2);}
+.hero-stats{display:flex;gap:40px;margin-top:56px;animation:fadeUp .8s 1s ease both;}
+.hstat-num{font-family:'Playfair Display',serif;font-size:40px;font-weight:600;color:var(--orange-light);line-height:1;}
+.hstat-label{font-size:11px;color:rgba(255,255,255,.55);margin-top:4px;}
+.hero-visual{position:relative;z-index:1;padding-left:40px;animation:fadeUp .8s .5s ease both;}
+.hv-main{width:100%;height:300px;border-radius:16px;overflow:hidden;box-shadow:var(--shadow-lg);}
+.hv-main img{width:100%;height:100%;object-fit:cover;}
+.hv-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;}
+.hv-sm{height:150px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);}
+.hv-sm img{width:100%;height:100%;object-fit:cover;}
+.hv-badge{position:absolute;bottom:178px;left:20px;background:#fff;border-radius:10px;padding:10px 18px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:10px;}
+.hv-dot{width:9px;height:9px;background:#22C55E;border-radius:50%;}
+.hv-btxt{font-size:12px;font-weight:600;color:var(--navy);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* SECTIONS */
+section{padding:90px 60px;}
+.stag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);margin-bottom:14px;}
+.stitle{font-family:'Playfair Display',serif;font-size:clamp(30px,4vw,50px);font-weight:600;color:var(--navy);line-height:1.15;margin-bottom:14px;}
+.ssub{font-size:15px;line-height:1.8;color:var(--text-light);max-width:600px;}
+
+/* ABOUT */
+#about{background:var(--off-white);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.about-imgs{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.aimg{border-radius:12px;overflow:hidden;box-shadow:var(--shadow);}
+.aimg img{width:100%;object-fit:cover;display:block;}
+.aimg.tall img{height:440px;}
+.aimg img{height:210px;}
+.atxt{font-size:15px;line-height:1.9;color:var(--text-light);margin:22px 0 28px;}
+.avals{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.aval{background:#fff;border-radius:10px;padding:18px;border:1px solid var(--gray-border);transition:all .3s;}
+.aval:hover{border-color:var(--orange);box-shadow:var(--shadow);}
+.aval-icon{font-size:26px;margin-bottom:8px;}
+.aval-title{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:5px;}
+.aval-desc{font-size:11px;color:var(--gray);line-height:1.6;}
+
+/* COMPANIES */
+#companies{background:var(--white);}
+.co-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:50px;}
+.cogrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--gray-border);border-radius:16px;overflow:hidden;}
+.cocard{background:#fff;padding:28px 24px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;}
+.cocard::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--orange);transform:scaleX(0);transition:transform .3s;transform-origin:left;}
+.cocard:hover{background:var(--light-bg);}
+.cocard:hover::after{transform:scaleX(1);}
+.co-logo-sm{width:44px;height:44px;background:var(--navy);border-radius:9px;border:2px solid var(--orange);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:12px;margin-bottom:14px;}
+.co-nm{font-size:17px;font-weight:700;color:var(--navy);margin-bottom:3px;}
+.co-nm span{color:var(--orange);}
+.co-tg{font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gray-light);margin-bottom:10px;display:block;}
+.co-ds{font-size:12px;line-height:1.7;color:var(--gray);}
+.co-arr{position:absolute;top:18px;right:18px;color:var(--orange);font-size:16px;opacity:0;transform:translate(-4px,4px);transition:all .25s;}
+.cocard:hover .co-arr{opacity:1;transform:translate(0,0);}
+
+/* PORTFOLIO */
+#portfolio{background:var(--off-white);}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:50px;}
+.pcard{border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff;transition:all .3s;cursor:pointer;}
+.pcard:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);}
+.pimg{height:200px;overflow:hidden;position:relative;}
+.pimg img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.pcard:hover .pimg img{transform:scale(1.05);}
+.ptag{position:absolute;top:14px;left:14px;background:var(--orange);color:#fff;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;}
+.pbody{padding:20px;}
+.ptitle{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:8px;}
+.pmeta{font-size:12px;color:var(--gray);display:flex;gap:14px;}
+
+/* WHY */
+#why{background:var(--navy);}
+#why .stitle{color:#fff;}
+#why .stag{color:var(--orange-light);}
+#why .ssub{color:rgba(255,255,255,.65);}
+.wgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:50px;}
+.wcard{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:32px 26px;transition:all .3s;}
+.wcard:hover{background:rgba(255,255,255,.09);border-color:rgba(232,146,58,.4);}
+.wnum{font-family:'Playfair Display',serif;font-size:44px;color:rgba(232,146,58,.2);line-height:1;margin-bottom:16px;}
+.wicon{font-size:30px;margin-bottom:14px;display:block;}
+.wtitle{font-size:15px;font-weight:700;color:#fff;margin-bottom:10px;}
+.wtext{font-size:13px;line-height:1.8;color:rgba(255,255,255,.6);}
+
+/* CONTACT */
+#contact{background:var(--white);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.cdetail{margin-top:36px;display:flex;flex-direction:column;gap:24px;}
+.citem-label{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);margin-bottom:5px;}
+.citem-val{font-size:15px;font-weight:600;color:var(--navy);}
+.citem-sub{font-size:13px;color:var(--gray);margin-top:2px;}
+.cform{background:var(--off-white);border-radius:18px;padding:44px;}
+.cform h3{font-family:'Playfair Display',serif;font-size:26px;color:var(--navy);margin-bottom:28px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.fg{margin-bottom:14px;}
+.fg label{display:block;font-size:12px;font-weight:600;color:var(--text-light);margin-bottom:7px;}
+.fg input,.fg select,.fg textarea{width:100%;padding:11px 14px;border-radius:8px;border:1.5px solid var(--gray-border);background:#fff;font-family:'Raleway',sans-serif;font-size:13px;color:var(--text);transition:border-color .2s;outline:none;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--navy);}
+.fg textarea{height:90px;resize:vertical;}
+.btn-submit{width:100%;padding:14px;background:var(--navy);color:#fff;border:none;border-radius:8px;font-family:'Raleway',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .3s;}
+.btn-submit:hover{background:var(--navy-dark);transform:translateY(-1px);}
+.fsuccess{display:none;text-align:center;padding:40px 0;}
+.fsuccess.show{display:block;}
+.fsuccess-icon{font-size:48px;margin-bottom:14px;}
+.fsuccess-title{font-family:'Playfair Display',serif;font-size:26px;color:var(--navy);margin-bottom:10px;}
+.fsuccess-text{font-size:14px;color:var(--gray);line-height:1.7;}
+
+/* FOOTER */
+footer{background:var(--navy-dark);padding:56px 60px;}
+.ftop{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:44px;}.footer-logo-img{height:40px;width:auto;display:block;margin-bottom:14px;}
+.flogo{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.flogo-icon{width:42px;height:42px;background:rgba(255,255,255,.1);border-radius:10px;border:2px solid var(--orange);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px;}
+.flogo-text{font-family:'Playfair Display',serif;font-size:21px;color:#fff;}
+.flogo-text span{color:var(--orange);}
+.ftagline{font-size:13px;color:rgba(255,255,255,.5);line-height:1.7;max-width:260px;}
+.fcol h5{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);margin-bottom:18px;}
+.fcol ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.fcol ul li a{color:rgba(255,255,255,.6);text-decoration:none;font-size:13px;transition:color .2s;cursor:pointer;}
+.fcol ul li a:hover{color:#fff;}
+.fbot{border-top:1px solid rgba(255,255,255,.1);padding-top:26px;display:flex;justify-content:space-between;align-items:center;}
+.fcopy{font-size:12px;color:rgba(255,255,255,.4);font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1;}
+.flinks{display:flex;gap:22px;}
+.flinks a{font-size:12px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;}
+.flinks a:hover{color:rgba(255,255,255,.8);}
+
+/* COMPANY MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:300;background:rgba(18,41,82,.7);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.open{display:flex;}
+.modal{background:#fff;border-radius:18px;max-width:660px;width:100%;max-height:85vh;overflow-y:auto;animation:mIn .3s ease;box-shadow:0 24px 80px rgba(18,41,82,.25);}
+@keyframes mIn{from{opacity:0;transform:scale(.95) translateY(14px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.mhead{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);padding:36px 44px 28px;border-radius:18px 18px 0 0;position:relative;}
+.mco-logo{width:52px;height:52px;background:#fff;border-radius:11px;border:2.5px solid var(--orange);display:flex;align-items:center;justify-content:center;color:var(--navy);font-weight:800;font-size:15px;margin-bottom:18px;}
+.mlabel{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(232,146,58,.9);margin-bottom:7px;}
+.mname{font-family:'Playfair Display',serif;font-size:40px;color:#fff;line-height:1;}
+.mname span{color:var(--orange-light);}
+.mtagline{font-size:13px;color:rgba(255,255,255,.65);margin-top:8px;}
+.mclose{position:absolute;top:18px;right:18px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;width:34px;height:34px;border-radius:8px;cursor:pointer;font-size:16px;transition:all .2s;display:flex;align-items:center;justify-content:center;}
+.mclose:hover{background:rgba(255,255,255,.2);}
+.mbody{padding:36px 44px 44px;}
+.mdesc{font-size:14px;line-height:1.9;color:var(--text-light);margin-bottom:28px;}
+.msvc h4{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);margin-bottom:18px;}
+.slist{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+.slist li{font-size:12px;color:var(--text-light);padding:9px 14px 9px 32px;background:var(--off-white);border-radius:7px;position:relative;}
+.slist li::before{content:'✓';position:absolute;left:11px;color:var(--orange);font-weight:700;}
+
+/* AUTH MODAL */
+.auth-overlay{position:fixed;inset:0;z-index:400;background:rgba(18,41,82,.75);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px;}
+.auth-overlay.open{display:flex;}
+.auth-box{background:#fff;border-radius:18px;width:100%;max-width:420px;padding:44px;box-shadow:0 24px 80px rgba(18,41,82,.3);animation:mIn .3s ease;position:relative;}
+.auth-x{position:absolute;top:14px;right:14px;background:var(--off-white);border:none;border-radius:7px;width:30px;height:30px;cursor:pointer;font-size:15px;color:var(--gray);display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.auth-x:hover{background:var(--gray-border);}
+.alogo{display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:28px;}
+.alogo-icon{width:46px;height:46px;background:var(--navy);border-radius:10px;border:2px solid var(--orange);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:15px;}
+.alogo-text{font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);}
+.alogo-text span{color:var(--orange);}
+.atabs{display:flex;margin-bottom:26px;border:1.5px solid var(--gray-border);border-radius:9px;overflow:hidden;}
+.atab{flex:1;padding:10px;border:none;background:transparent;font-family:'Raleway',sans-serif;font-size:13px;font-weight:600;color:var(--gray);cursor:pointer;transition:all .2s;}
+.atab.active{background:var(--navy);color:#fff;}
+.aform{display:none;}
+.aform.active{display:block;}
+.ag{margin-bottom:14px;}
+.ag label{display:block;font-size:12px;font-weight:600;color:var(--text-light);margin-bottom:7px;}
+.ag input{width:100%;padding:11px 14px;border-radius:8px;border:1.5px solid var(--gray-border);background:#fff;font-family:'Raleway',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color .2s;}
+.ag input:focus{border-color:var(--navy);}
+.btn-auth{width:100%;padding:13px;background:var(--navy);color:#fff;border:none;border-radius:8px;font-family:'Raleway',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;margin-top:6px;}
+.btn-auth:hover{background:var(--navy-dark);}
+.adiv{display:flex;align-items:center;gap:10px;margin:16px 0;color:var(--gray);font-size:12px;}
+.adiv::before,.adiv::after{content:'';flex:1;height:1px;background:var(--gray-border);}
+.aforgot{font-size:12px;color:var(--navy);text-align:right;cursor:pointer;margin-top:6px;text-decoration:underline;}
+.agrow{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+
+/* PROFILE */
+.page{display:none;min-height:100vh;padding-top:80px;}
+.page.active{display:block;}
+.prof-wrap{max-width:860px;margin:0 auto;padding:56px 60px;}
+.back-btn{display:inline-flex;align-items:center;gap:7px;color:var(--navy);font-size:14px;font-weight:600;cursor:pointer;margin-bottom:28px;border:none;background:none;font-family:'Raleway',sans-serif;}
+.back-btn:hover{color:var(--orange);}
+.prof-hdr{display:flex;align-items:center;gap:22px;margin-bottom:44px;}
+.prof-av{width:76px;height:76px;border-radius:14px;background:var(--navy);border:3px solid var(--orange);display:flex;align-items:center;justify-content:center;color:#fff;font-size:26px;font-weight:700;}
+.prof-nm{font-family:'Playfair Display',serif;font-size:30px;color:var(--navy);}
+.prof-em{font-size:14px;color:var(--gray);margin-top:3px;}
+.ptabs{display:flex;border-bottom:2px solid var(--gray-border);margin-bottom:36px;}
+.ptab{padding:11px 22px;border:none;background:transparent;border-bottom:2px solid transparent;margin-bottom:-2px;font-family:'Raleway',sans-serif;font-size:14px;font-weight:600;color:var(--gray);cursor:pointer;transition:all .2s;}
+.ptab.active{color:var(--navy);border-bottom-color:var(--orange);}
+.ptcont{display:none;}
+.ptcont.active{display:block;}
+.pfield{margin-bottom:18px;}
+.pfield label{display:block;font-size:12px;font-weight:600;color:var(--text-light);margin-bottom:7px;}
+.pfield input,.pfield select{width:100%;padding:11px 14px;border-radius:8px;border:1.5px solid var(--gray-border);background:#fff;font-family:'Raleway',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color .2s;}
+.pfield input:focus{border-color:var(--navy);}
+.pfield input[readonly]{background:var(--off-white);color:var(--gray);}
+.btn-save{padding:11px 28px;background:var(--orange);color:#fff;border:none;border-radius:8px;font-family:'Raleway',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;}
+.btn-save:hover{background:var(--orange-dark);}
+.prow{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.mail-banner{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);border-radius:16px;padding:40px;text-align:center;color:#fff;}
+.mb-icon{font-size:52px;margin-bottom:14px;}
+.mb-title{font-family:'Playfair Display',serif;font-size:26px;margin-bottom:10px;}
+.mb-text{font-size:14px;color:rgba(255,255,255,.7);margin-bottom:24px;line-height:1.7;}
+.mb-addr{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:9px;padding:12px 22px;display:inline-block;font-size:16px;font-weight:700;color:var(--orange-light);margin-bottom:24px;}
+.btn-mail{display:inline-block;padding:13px 32px;background:var(--orange);color:#fff;border:none;border-radius:8px;font-family:'Raleway',sans-serif;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:all .2s;}
+.btn-mail:hover{background:var(--orange-dark);}
+.mail-hint{margin-top:22px;padding:22px;background:var(--off-white);border-radius:12px;font-size:13px;color:var(--text-light);line-height:1.8;}
+.mail-hint strong{color:var(--navy);}
+
+/* REVEAL */
+.reveal{opacity:1;transform:none;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  nav{padding:12px 20px;}
+  .nav-links{display:none;}
+  .hero{grid-template-columns:1fr;padding:100px 24px 60px;}
+  .hero-visual{display:none;}
+  #about{padding:60px 24px;}
+  .about-grid{grid-template-columns:1fr;gap:36px;}
+  .about-imgs{display:none;}
+  #companies{padding:60px 24px;}
+  .cogrid{grid-template-columns:repeat(2,1fr);}
+  .co-head{flex-direction:column;align-items:flex-start;gap:14px;}
+  #portfolio{padding:60px 24px;}
+  .pgrid{grid-template-columns:1fr 1fr;}
+  #why{padding:60px 24px;}
+  .wgrid{grid-template-columns:1fr 1fr;}
+  #contact{grid-template-columns:1fr;gap:36px;padding:60px 24px;}
+  footer{padding:36px 24px;}
+  .ftop{grid-template-columns:1fr 1fr;gap:36px;}
+  .prof-wrap{padding:36px 24px;}
+}
+@media(max-width:640px){
+  .hero-stats{display:none;}
+  .cogrid{grid-template-columns:1fr;}
+  .pgrid{grid-template-columns:1fr;}
+  .wgrid{grid-template-columns:1fr;}
+  .frow,.prow{grid-template-columns:1fr;}
+  .ftop{grid-template-columns:1fr;}
+  .fbot{flex-direction:column;gap:14px;text-align:center;}
+  .avals{grid-template-columns:1fr;}
+  .mbody{padding:20px;}
+  .mhead{padding:22px;}
+  .auth-box{padding:28px 20px;}
+  .slist{grid-template-columns:1fr;}
+  .agrow{grid-template-columns:1fr;}
+}
+</style>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="logo" onclick="showMain()">
+    <img src="logo/US Holding.svg" class="nav-logo-img" alt="US Holding">
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about" onclick="showMain()">О холдинге</a></li>
+    <li><a href="#companies" onclick="showMain()">Компании</a></li>
+    <li><a href="#portfolio" onclick="showMain()">Портфолио</a></li>
+    <li><a href="#why" onclick="showMain()">Преимущества</a></li>
+    <li><a href="#contact" onclick="showMain()">Контакты</a></li>
+  </ul>
+  <div class="nav-right">
+    <!-- Кнопка почты — всегда видна -->
+    <a href="https://outlook.office.com" target="_blank" class="btn-mail-nav" title="Корпоративная почта">
+      <span class="mail-icon">✉</span> Почта
+    </a>
+    <div id="authBtns" style="display:flex;gap:10px;">
+      <button class="btn-login" onclick="netlifyIdentity.open()">Войти</button>
+    </div>
+    <div class="user-menu" id="userMenu" style="display:none;">
+      <button class="user-btn" onclick="toggleDrop()">
+        <div class="user-avatar" id="uAvNav">А</div>
+        <span class="user-name" id="uNmNav">Аккаунт</span>
+        <span style="font-size:11px;color:var(--gray);">▾</span>
+      </button>
+      <div class="user-dropdown" id="uDrop">
+        <div class="udrop-header">
+          <div class="udrop-name" id="dName">Имя</div>
+          <div class="udrop-email" id="dEmail">email</div>
+        </div>
+        <button class="ditem" onclick="showProfile('info')">👤 Мой профиль</button>
+        <button class="ditem" onclick="showProfile('password')">🔒 Сменить пароль</button>
+        <button class="ditem mail" onclick="window.open('https://outlook.office.com','_blank')">✉️ Корпоративная почта →</button>
+        <div class="ddivider"></div>
+        <button class="ditem danger" onclick="doLogout()">🚪 Выйти</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN SITE -->
+<div id="mainSite">
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-badge">⬡ Группа компаний · Астана, Казахстан</div>
+    <h1 class="hero-title">Строим<br><span>будущее</span><br>сегодня</h1>
+    <p class="hero-desc">US Holding — вертикально интегрированная группа из 17 компаний, охватывающих полный цикл строительства и управления недвижимостью.</p>
+    <div class="hero-btns">
+      <a href="#companies" class="btn-hp">Наши компании</a>
+      <a href="#contact" class="btn-hg">Обсудить проект</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hstat-num">17</div><div class="hstat-label">Направлений</div></div>
+      <div><div class="hstat-num">360°</div><div class="hstat-label">Покрытие цикла</div></div>
+      <div><div class="hstat-num">2014</div><div class="hstat-label">Год основания</div></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hv-main"><img src="images/astana.jpg" alt="Здание"></div>
+    <div class="hv-row">
+      <div class="hv-sm"><img src="images/start1.jpg" alt="Стройка"></div>
+      <div class="hv-sm"><img src="images/start2.jpg" alt="Проектирование"></div>
+    </div>
+    <div class="hv-badge"><div class="hv-dot"></div><div class="hv-btxt">Активные проекты</div></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-imgs reveal">
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div class="aimg tall"><img src="images/holding1.jpg" alt="Объект строительства"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div class="aimg"><img src="images/holding2.jpg" alt="Офис"></div>
+        <div class="aimg"><img src="images/holding3.webp" alt="Проект"></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="stag">О холдинге</div>
+      <h2 class="stitle">Единая экосистема строительства</h2>
+      <p class="atxt">US Holding объединяет 17 специализированных компаний, охватывающих весь жизненный цикл объекта — от поиска земли до управления готовой недвижимостью.</p>
+      <p class="atxt">Вертикальная интеграция позволяет контролировать качество на каждом этапе, оптимизировать сроки и предлагать клиентам комплексное решение под одной крышей.</p>
+      <div class="avals">
+        <div class="aval"><div class="aval-icon">🔗</div><div class="aval-title">Полная интеграция</div><div class="aval-desc">17 компаний работают как единый механизм</div></div>
+        <div class="aval"><div class="aval-icon">💎</div><div class="aval-title">Контроль качества</div><div class="aval-desc">Собственный технадзор на каждом объекте</div></div>
+        <div class="aval"><div class="aval-icon">⚡</div><div class="aval-title">Оперативность</div><div class="aval-desc">Оптимизированная логистика и снабжение</div></div>
+        <div class="aval"><div class="aval-icon">🏆</div><div class="aval-title">Надёжность</div><div class="aval-desc">Полная ответственность перед клиентом</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPANIES -->
+<section id="companies">
+  <div class="co-head reveal">
+    <div><div class="stag">Структура группы</div><h2 class="stitle">Наши компании</h2></div>
+    <p class="ssub" style="max-width:320px;">Нажмите на карточку для подробной информации</p>
+  </div>
+  <div class="cogrid">
+    <div class="cocard reveal" onclick="openModal('holding')"><img src="logo/US Holding.svg" class="co-logo-img" alt="US Holding"><span class="co-tg">Головная компания</span><p class="co-ds">Центр стратегического планирования и корпоративного управления всей группой компаний.</p></div>
+    <div class="cocard reveal" onclick="openModal('development')"><img src="logo/US Development.svg" class="co-logo-img" alt="US Development"><span class="co-tg">Девелопмент</span><p class="co-ds">Поиск перспективных участков, разработка концепций и полный цикл разрешительной документации.</p></div>
+    <div class="cocard reveal" onclick="openModal('capital')"><img src="logo/US Capital.svg" class="co-logo-img" alt="US Capital"><span class="co-tg">Инвестиции</span><p class="co-ds">Привлечение капитала и управление инвестициями. Банковские инструменты и частные инвесторы.</p></div>
+    <div class="cocard reveal" onclick="openModal('academy')"><img src="logo/US Academy.svg" class="co-logo-img" alt="US Academy"><span class="co-tg">Корпоративный университет</span><p class="co-ds">Подготовка инженеров, прорабов и менеджеров по внутренним стандартам качества US.</p></div>
+    <div class="cocard reveal" onclick="openModal('project')"><img src="logo/US Project.svg" class="co-logo-img" alt="US Project"><span class="co-tg">Проектирование</span><p class="co-ds">Полный пакет проектно-сметной документации от первых эскизов до сложнейших конструктивных расчётов.</p></div>
+    <div class="cocard reveal" onclick="openModal('design')"><img src="logo/US Design.svg" class="co-logo-img" alt="US Design"><span class="co-tg">Дизайн</span><p class="co-ds">Дизайн интерьеров, холлов и офисных пространств. Концепции ландшафтного благоустройства.</p></div>
+    <div class="cocard reveal" onclick="openModal('quality')"><img src="logo/US Quality.svg" class="co-logo-img" alt="US Quality"><span class="co-tg">Контроль качества</span><p class="co-ds">Независимый мониторинг на всех этапах строительства. Соответствие СНиПам и проектным решениям.</p></div>
+    <div class="cocard reveal" onclick="openModal('construction')"><img src="logo/US Construction.svg" class="co-logo-img" alt="US Construction"><span class="co-tg">Генподряд</span><p class="co-ds">Координация всех процессов на площадке. Соблюдение графиков и ввод объектов в эксплуатацию.</p></div>
+    <div class="cocard reveal" onclick="openModal('engineering')"><img src="logo/US Engineering.svg" class="co-logo-img" alt="US Engineering"><span class="co-tg">Инфраструктура</span><p class="co-ds">Дороги, мосты, коммуникации и энергетическая инфраструктура объектов.</p></div>
+    <div class="cocard reveal" onclick="openModal('systems')"><img src="logo/US Systems.svg" class="co-logo-img" alt="US Systems"><span class="co-tg">Инженерные системы</span><p class="co-ds">Монтаж ОВК, водопровода, канализации, слаботочных сетей и систем безопасности.</p></div>
+    <div class="cocard reveal" onclick="openModal('industry')"><img src="logo/US Industry.svg" class="co-logo-img" alt="US Industry"><span class="co-tg">Промышленность</span><p class="co-ds">Заводы, логистические хабы и склады. Быстровозводимые конструкции и промышленные полы.</p></div>
+    <div class="cocard reveal" onclick="openModal('prime')"><img src="logo/US Prime.svg" class="co-logo-img" alt="US Prime"><span class="co-tg">Фит-аут и отделка</span><p class="co-ds">Чистовая отделка квартир и офисов под ключ в классах Comfort и Business.</p></div>
+    <div class="cocard reveal" onclick="openModal('trade')"><img src="logo/US Trade.svg" class="co-logo-img" alt="US Trade"><span class="co-tg">Снабжение</span><p class="co-ds">Централизованные закупки напрямую у заводов-изготовителей. Минимальная себестоимость для всей группы.</p></div>
+    <div class="cocard reveal" onclick="openModal('logistics')"><img src="logo/US Logistics.svg" class="co-logo-img" alt="US Logistics"><span class="co-tg">Механизация</span><p class="co-ds">Собственный парк спецтехники: краны, экскаваторы, бетоносмесители. Управление цепочками поставок.</p></div>
+    <div class="cocard reveal" onclick="openModal('sales')"><img src="logo/US Sales.svg" class="co-logo-img" alt="US Sales"><span class="co-tg">Продажи</span><p class="co-ds">Продажи и аренда построенных площадей. Сопровождение сделок и ипотечные программы.</p></div>
+    <div class="cocard reveal" onclick="openModal('media')"><img src="logo/US Media.svg" class="co-logo-img" alt="US Media"><span class="co-tg">Маркетинг</span><p class="co-ds">Брендинг, реклама и PR. Визуальный контент и управление репутацией группы.</p></div>
+    <div class="cocard reveal" onclick="openModal('service')"><img src="logo/US Service.svg" class="co-logo-img" alt="US Service"><span class="co-tg">Эксплуатация</span><p class="co-ds">Обслуживание ЖК и бизнес-центров. Чистота, безопасность и современный сервис для жителей.</p></div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="reveal" style="text-align:center">
+    <div class="stag">Наши работы</div>
+    <h2 class="stitle">Портфолио проектов</h2>
+    <p class="ssub" style="margin:0 auto">Реализованные и текущие объекты группы компаний</p>
+  </div>
+  <div class="pgrid">
+    <div class="pcard reveal"><div class="pimg"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgODAwIDUwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxMjI5NTIiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxQjNBNkIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9InVybCgjZykiLz4KPHJlY3QgeD0iNjAiIHk9IjIwMCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIyMDAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xNSkiIHJ4PSI0Ii8+CjxyZWN0IHg9IjIwMCIgeT0iMTUwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjI1MCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjIpIiByeD0iNCIvPgo8cmVjdCB4PSIzMjAiIHk9IjE3MCIgd2lkdGg9IjE0MCIgaGVpZ2h0PSIyMzAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xOCkiIHJ4PSI0Ii8+CjxyZWN0IHg9IjQ4MCIgeT0iMTIwIiB3aWR0aD0iOTAiIGhlaWdodD0iMjgwIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMjIpIiByeD0iNCIvPgo8cmVjdCB4PSI1OTAiIHk9IjE2MCIgd2lkdGg9IjExMCIgaGVpZ2h0PSIyNDAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xNikiIHJ4PSI0Ii8+CjxyZWN0IHg9IjYwIiB5PSIzOTAiIHdpZHRoPSI2NDAiIGhlaWdodD0iMTAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4zKSIgcng9IjIiLz4KPHJlY3QgeD0iNjAiIHk9IjE4MCIgd2lkdGg9IjE4MCIgaGVpZ2h0PSIxMiIgZmlsbD0iI0U4OTIzQSIgcng9IjIiIG9wYWNpdHk9IjAuOCIvPgo8dGV4dCB4PSI0MDAiIHk9IjEwMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI4IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuOSkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSJib2xkIj7QltCaINCh0LXQstC10YDQvdGL0Lk8L3RleHQ+Cjx0ZXh0IHg9IjQwMCIgeT0iNDcwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC41KSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+VVMgSG9sZGluZyDCtyDQkNGB0YLQsNC90LA8L3RleHQ+Cjwvc3ZnPg==" alt="ЖК"><span class="ptag">Жилая</span></div><div class="pbody"><div class="ptitle">ЖК «Ажар»</div><div class="pmeta"><span>📍 г. Уральск</span><span>🏗 US Construction</span><span>2025</span></div></div></div>
+    <div class="pcard reveal"><div class="pimg"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgODAwIDUwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxQjNBNkIiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMyMzQ5ODciLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9InVybCgjZykiLz4KPHJlY3QgeD0iNjAiIHk9IjIwMCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIyMDAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xNSkiIHJ4PSI0Ii8+CjxyZWN0IHg9IjIwMCIgeT0iMTUwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjI1MCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjIpIiByeD0iNCIvPgo8cmVjdCB4PSIzMjAiIHk9IjE3MCIgd2lkdGg9IjE0MCIgaGVpZ2h0PSIyMzAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xOCkiIHJ4PSI0Ii8+CjxyZWN0IHg9IjQ4MCIgeT0iMTIwIiB3aWR0aD0iOTAiIGhlaWdodD0iMjgwIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMjIpIiByeD0iNCIvPgo8cmVjdCB4PSI1OTAiIHk9IjE2MCIgd2lkdGg9IjExMCIgaGVpZ2h0PSIyNDAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xNikiIHJ4PSI0Ii8+CjxyZWN0IHg9IjYwIiB5PSIzOTAiIHdpZHRoPSI2NDAiIGhlaWdodD0iMTAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4zKSIgcng9IjIiLz4KPHJlY3QgeD0iNjAiIHk9IjE4MCIgd2lkdGg9IjE4MCIgaGVpZ2h0PSIxMiIgZmlsbD0iI0U4OTIzQSIgcng9IjIiIG9wYWNpdHk9IjAuOCIvPgo8dGV4dCB4PSI0MDAiIHk9IjEwMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI4IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuOSkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSJib2xkIj7QntGE0LjRgdC90YvQuSDRhtC10L3RgtGAINCf0YDQsNC50Lw8L3RleHQ+Cjx0ZXh0IHg9IjQwMCIgeT0iNDcwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC41KSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+VVMgSG9sZGluZyDCtyDQkNGB0YLQsNC90LA8L3RleHQ+Cjwvc3ZnPg==" alt="Офис"><span class="ptag">Коммерческая</span></div><div class="pbody"><div class="ptitle">Офисный центр «Прайм»</div><div class="pmeta"><span>📍 Астана</span><span>🏗 US Construction</span><span>2025</span></div></div></div>
+    <div class="pcard reveal"><div class="pimg"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgODAwIDUwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxMjI5NTIiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMyRTVGQTMiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9InVybCgjZykiLz4KPHJlY3QgeD0iNjAiIHk9IjIwMCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIyMDAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xNSkiIHJ4PSI0Ii8+CjxyZWN0IHg9IjIwMCIgeT0iMTUwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjI1MCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjIpIiByeD0iNCIvPgo8cmVjdCB4PSIzMjAiIHk9IjE3MCIgd2lkdGg9IjE0MCIgaGVpZ2h0PSIyMzAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xOCkiIHJ4PSI0Ii8+CjxyZWN0IHg9IjQ4MCIgeT0iMTIwIiB3aWR0aD0iOTAiIGhlaWdodD0iMjgwIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMjIpIiByeD0iNCIvPgo8cmVjdCB4PSI1OTAiIHk9IjE2MCIgd2lkdGg9IjExMCIgaGVpZ2h0PSIyNDAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xNikiIHJ4PSI0Ii8+CjxyZWN0IHg9IjYwIiB5PSIzOTAiIHdpZHRoPSI2NDAiIGhlaWdodD0iMTAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4zKSIgcng9IjIiLz4KPHJlY3QgeD0iNjAiIHk9IjE4MCIgd2lkdGg9IjE4MCIgaGVpZ2h0PSIxMiIgZmlsbD0iI0U4OTIzQSIgcng9IjIiIG9wYWNpdHk9IjAuOCIvPgo8dGV4dCB4PSI0MDAiIHk9IjEwMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI4IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuOSkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSJib2xkIj7Qm9C+0LPQuNGB0YLQuNGH0LXRgdC60LjQuSDQutC+0LzQv9C70LXQutGBPC90ZXh0Pgo8dGV4dCB4PSI0MDAiIHk9IjQ3MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuNSkiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlVTIEhvbGRpbmcgwrcg0JDRgdGC0LDQvdCwPC90ZXh0Pgo8L3N2Zz4=" alt="Склад"><span class="ptag">Промышленная</span></div><div class="pbody"><div class="ptitle">Логистический комплекс</div><div class="pmeta"><span>📍 г. Караганда</span><span>🏗 US Industry</span><span>2025</span></div></div></div>
+    <div class="pcard reveal"><div class="pimg"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgODAwIDUwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMyMzQ5ODciLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxQjNBNkIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9InVybCgjZykiLz4KPHJlY3QgeD0iNjAiIHk9IjIwMCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIyMDAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xNSkiIHJ4PSI0Ii8+CjxyZWN0IHg9IjIwMCIgeT0iMTUwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjI1MCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjIpIiByeD0iNCIvPgo8cmVjdCB4PSIzMjAiIHk9IjE3MCIgd2lkdGg9IjE0MCIgaGVpZ2h0PSIyMzAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xOCkiIHJ4PSI0Ii8+CjxyZWN0IHg9IjQ4MCIgeT0iMTIwIiB3aWR0aD0iOTAiIGhlaWdodD0iMjgwIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMjIpIiByeD0iNCIvPgo8cmVjdCB4PSI1OTAiIHk9IjE2MCIgd2lkdGg9IjExMCIgaGVpZ2h0PSIyNDAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xNikiIHJ4PSI0Ii8+CjxyZWN0IHg9IjYwIiB5PSIzOTAiIHdpZHRoPSI2NDAiIGhlaWdodD0iMTAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4zKSIgcng9IjIiLz4KPHJlY3QgeD0iNjAiIHk9IjE4MCIgd2lkdGg9IjE4MCIgaGVpZ2h0PSIxMiIgZmlsbD0iI0U4OTIzQSIgcng9IjIiIG9wYWNpdHk9IjAuOCIvPgo8dGV4dCB4PSI0MDAiIHk9IjEwMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI4IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuOSkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSJib2xkIj7QntGC0LTQtdC70LrQsCDQsNC/0LDRgNGC0LDQvNC10L3RgtC+0LI8L3RleHQ+Cjx0ZXh0IHg9IjQwMCIgeT0iNDcwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC41KSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+VVMgSG9sZGluZyDCtyDQkNGB0YLQsNC90LA8L3RleHQ+Cjwvc3ZnPg==" alt="Интерьер"><span class="ptag">Отделка</span></div><div class="pbody"><div class="ptitle">Дизайнерская отделка апартаментов</div><div class="pmeta"><span>📍 Астана</span><span>🏗 US Prime</span><span>2025</span></div></div></div>
+    <div class="pcard reveal"><div class="pimg"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgODAwIDUwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxQjNBNkIiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxMjI5NTIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9InVybCgjZykiLz4KPHJlY3QgeD0iNjAiIHk9IjIwMCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIyMDAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xNSkiIHJ4PSI0Ii8+CjxyZWN0IHg9IjIwMCIgeT0iMTUwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjI1MCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjIpIiByeD0iNCIvPgo8cmVjdCB4PSIzMjAiIHk9IjE3MCIgd2lkdGg9IjE0MCIgaGVpZ2h0PSIyMzAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xOCkiIHJ4PSI0Ii8+CjxyZWN0IHg9IjQ4MCIgeT0iMTIwIiB3aWR0aD0iOTAiIGhlaWdodD0iMjgwIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMjIpIiByeD0iNCIvPgo8cmVjdCB4PSI1OTAiIHk9IjE2MCIgd2lkdGg9IjExMCIgaGVpZ2h0PSIyNDAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xNikiIHJ4PSI0Ii8+CjxyZWN0IHg9IjYwIiB5PSIzOTAiIHdpZHRoPSI2NDAiIGhlaWdodD0iMTAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4zKSIgcng9IjIiLz4KPHJlY3QgeD0iNjAiIHk9IjE4MCIgd2lkdGg9IjE4MCIgaGVpZ2h0PSIxMiIgZmlsbD0iI0U4OTIzQSIgcng9IjIiIG9wYWNpdHk9IjAuOCIvPgo8dGV4dCB4PSI0MDAiIHk9IjEwMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI4IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuOSkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSJib2xkIj7QnNCk0Jog0KbQtdC90YLRgNCw0LvRjNC90YvQuTwvdGV4dD4KPHRleHQgeD0iNDAwIiB5PSI0NzAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjUpIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5VUyBIb2xkaW5nIMK3INCQ0YHRgtCw0L3QsDwvdGV4dD4KPC9zdmc+" alt="МФК"><span class="ptag">Девелопмент</span></div><div class="pbody"><div class="ptitle">МФК «Центральный»</div><div class="pmeta"><span>📍 г. Караганда</span><span>🏗 US Development</span><span>В работе</span></div></div></div>
+    <div class="pcard reveal"><div class="pimg"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgODAwIDUwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMyRTVGQTMiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMyMzQ5ODciLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9InVybCgjZykiLz4KPHJlY3QgeD0iNjAiIHk9IjIwMCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIyMDAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xNSkiIHJ4PSI0Ii8+CjxyZWN0IHg9IjIwMCIgeT0iMTUwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjI1MCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjIpIiByeD0iNCIvPgo8cmVjdCB4PSIzMjAiIHk9IjE3MCIgd2lkdGg9IjE0MCIgaGVpZ2h0PSIyMzAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xOCkiIHJ4PSI0Ii8+CjxyZWN0IHg9IjQ4MCIgeT0iMTIwIiB3aWR0aD0iOTAiIGhlaWdodD0iMjgwIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMjIpIiByeD0iNCIvPgo8cmVjdCB4PSI1OTAiIHk9IjE2MCIgd2lkdGg9IjExMCIgaGVpZ2h0PSIyNDAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xNikiIHJ4PSI0Ii8+CjxyZWN0IHg9IjYwIiB5PSIzOTAiIHdpZHRoPSI2NDAiIGhlaWdodD0iMTAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4zKSIgcng9IjIiLz4KPHJlY3QgeD0iNjAiIHk9IjE4MCIgd2lkdGg9IjE4MCIgaGVpZ2h0PSIxMiIgZmlsbD0iI0U4OTIzQSIgcng9IjIiIG9wYWNpdHk9IjAuOCIvPgo8dGV4dCB4PSI0MDAiIHk9IjEwMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI4IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuOSkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSJib2xkIj7QmtCy0LDRgNGC0LDQuyDQndC+0LLRi9C5INCz0L7RgNC+0LQ8L3RleHQ+Cjx0ZXh0IHg9IjQwMCIgeT0iNDcwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC41KSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+VVMgSG9sZGluZyDCtyDQkNGB0YLQsNC90LA8L3RleHQ+Cjwvc3ZnPg==" alt="Концепция"><span class="ptag">Проектирование</span></div><div class="pbody"><div class="ptitle">Квартал «Новый город»</div><div class="pmeta"><span>📍 Астана</span><span>🏗 US Design</span><span>В работе</span></div></div></div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="reveal" style="text-align:center">
+    <div class="stag">Преимущества</div>
+    <h2 class="stitle">Почему выбирают US Holding</h2>
+    <p class="ssub" style="margin:0 auto;color:rgba(255,255,255,.65)">Мы закрываем весь цикл — от идеи до эксплуатации</p>
+  </div>
+  <div class="wgrid">
+    <div class="wcard reveal"><div class="wnum">01</div><span class="wicon">🔗</span><div class="wtitle">Полный цикл</div><p class="wtext">От поиска земли до управления объектом — одна группа, одна ответственность.</p></div>
+    <div class="wcard reveal"><div class="wnum">02</div><span class="wicon">💎</span><div class="wtitle">Собственный QA/QC</div><p class="wtext">US Quality работает независимо от строительного подразделения на каждом объекте.</p></div>
+    <div class="wcard reveal"><div class="wnum">03</div><span class="wicon">⚡</span><div class="wtitle">Скорость</div><p class="wtext">Собственное снабжение и парк техники исключают простои и ускоряют стройку.</p></div>
+    <div class="wcard reveal"><div class="wnum">04</div><span class="wicon">📊</span><div class="wtitle">Прозрачность</div><p class="wtext">US Capital структурирует финансирование и обеспечивает открытую отчётность.</p></div>
+    <div class="wcard reveal"><div class="wnum">05</div><span class="wicon">🏗️</span><div class="wtitle">Любая сложность</div><p class="wtext">Жильё, офисы, промышленные объекты — реализуем проекты любого масштаба.</p></div>
+    <div class="wcard reveal"><div class="wnum">06</div><span class="wicon">🤝</span><div class="wtitle">Долгосрочно</div><p class="wtext">US Service и US Sales сопровождают объект после сдачи — мы с вами навсегда.</p></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="reveal">
+    <div class="stag">Контакты</div>
+    <h2 class="stitle">Обсудим ваш проект</h2>
+    <p class="ssub">Расскажите о задаче — предложим комплексное решение силами наших компаний</p>
+    <div class="cdetail">
+      <div><div class="citem-label">Головной офис</div><div class="citem-val">Казахстан, г. Караганда, пр. Абдирова, строение 32/1, офис 203</div></div>
+      <div><div class="citem-label">Email</div><div class="citem-val"><a href="mailto:info@usholding.kz">info@usholding.kz</a></div></div>
+      <div><div class="citem-label">Телефон</div><div class="citem-val">+7 (700) 000-00-00</div></div>
+      <div><div class="citem-label">Режим работы</div><div class="citem-val">Пн–Пт: 09:00 — 18:00</div><div class="citem-sub">По предварительной записи</div></div>
+    </div>
+  </div>
+  <div class="cform reveal">
+    <h3>Оставить заявку</h3>
+    <form id="contactForm" name="contact" netlify data-netlify="true" netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="contact">
+      <input type="hidden" name="bot-field" style="display:none">
+      <div class="frow">
+        <div class="fg"><label>Имя *</label><input type="text" name="name" placeholder="Ваше имя" required></div>
+        <div class="fg"><label>Компания</label><input type="text" name="company" placeholder="Название компании"></div>
+      </div>
+      <div class="frow">
+        <div class="fg"><label>Телефон *</label><input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required></div>
+        <div class="fg"><label>Email</label><input type="email" name="email" placeholder="email@example.com"></div>
+      </div>
+      <div class="fg">
+        <label>Направление</label>
+        <select name="direction">
+          <option value="">Выберите компанию группы</option>
+          <option>US Holding — общие вопросы</option>
+          <option>US Development — девелопмент</option>
+          <option>US Capital — инвестиции</option>
+          <option>US Academy — корпоративный университет</option>
+          <option>US Project — проектирование</option>
+          <option>US Design — дизайн и ландшафт</option>
+          <option>US Quality — контроль качества</option>
+          <option>US Construction — генеральный подряд</option>
+          <option>US Engineering — инфраструктура</option>
+          <option>US Systems — инженерные системы</option>
+          <option>US Industry — промышленное строительство</option>
+          <option>US Prime — фит-аут и отделка</option>
+          <option>US Trade — снабжение</option>
+          <option>US Logistics — механизация и логистика</option>
+          <option>US Sales — продажи и аренда</option>
+          <option>US Media — маркетинг и PR</option>
+          <option>US Service — управление объектами</option>
+        </select>
+      </div>
+      <div class="fg"><label>Сообщение</label><textarea name="message" placeholder="Опишите ваш проект..."></textarea></div>
+      <button type="submit" class="btn-submit">Отправить заявку</button>
+    </form>
+    <div class="fsuccess" id="fSuccess">
+      <div class="fsuccess-icon">✅</div>
+      <div class="fsuccess-title">Заявка отправлена!</div>
+      <p class="fsuccess-text">Наш менеджер свяжется с вами в течение 1 рабочего дня.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ftop">
+    <div>
+      <div class="flogo"><img src="logo/US Holding-footer.svg" class="footer-logo-img" alt="US Holding"></div>
+      <p class="ftagline">Вертикально интегрированная группа компаний полного цикла строительства и управления недвижимостью.</p>
+    </div>
+    <div class="fcol"><h5>Стратегическое управление и развитие</h5><ul><li><a onclick="openModal('holding')">US Holding</a></li><li><a onclick="openModal('development')">US Development</a></li><li><a onclick="openModal('capital')">US Capital</a></li><li><a onclick="openModal('academy')">US Academy</a></li></ul></div><div class="fcol"><h5>Проектирование и контроль качества</h5><ul><li><a onclick="openModal('project')">US Project</a></li><li><a onclick="openModal('design')">US Design</a></li><li><a onclick="openModal('quality')">US Quality</a></li></ul></div><div class="fcol"><h5>Строительство, инженерия и снабжение</h5><ul><li><a onclick="openModal('construction')">US Construction</a></li><li><a onclick="openModal('engineering')">US Engineering</a></li><li><a onclick="openModal('systems')">US Systems</a></li><li><a onclick="openModal('industry')">US Industry</a></li><li><a onclick="openModal('prime')">US Prime</a></li><li><a onclick="openModal('trade')">US Trade</a></li><li><a onclick="openModal('logistics')">US Logistics</a></li></ul></div><div class="fcol"><h5>Продажи, маркетинг и сервис</h5><ul><li><a onclick="openModal('sales')">US Sales</a></li><li><a onclick="openModal('media')">US Media</a></li><li><a onclick="openModal('service')">US Service</a></li></ul></div>
+  </div>
+  <div class="fbot">
+    <div class="fcopy">© 2014–2026 US Holding. Все права защищены.</div>
+    <div class="flinks"><a href="#">Конфиденциальность</a><a href="#">Условия</a><a href="#contact">Контакты</a></div>
+  </div>
+</footer>
+</div><!-- /mainSite -->
+
+<!-- PROFILE PAGE -->
+<div class="page" id="profilePage">
+  <div class="prof-wrap">
+    <button class="back-btn" onclick="showMain()">← Вернуться на сайт</button>
+    <div class="prof-hdr">
+      <div class="prof-av" id="profAvLg">А</div>
+      <div>
+        <div class="prof-nm" id="profNmDisp">Имя пользователя</div>
+        <div class="prof-em" id="profEmDisp">email</div>
+      </div>
+    </div>
+    <div class="ptabs">
+      <button class="ptab active" onclick="switchTab('info')">Профиль</button>
+      <button class="ptab" onclick="switchTab('password')">Безопасность</button>
+      <button class="ptab" onclick="switchTab('mail')">Почта</button>
+    </div>
+    <!-- INFO -->
+    <div class="ptcont active" id="tab-info">
+      <div class="prow">
+        <div class="pfield"><label>Имя</label><input type="text" id="pfName" placeholder="Имя"></div>
+        <div class="pfield"><label>Фамилия</label><input type="text" id="pfSurname" placeholder="Фамилия"></div>
+      </div>
+      <div class="pfield"><label>Email (логин)</label><input type="email" id="pfEmail" readonly></div>
+      <div class="pfield"><label>Телефон</label><input type="tel" placeholder="+7 (___) ___-__-__"></div>
+      <div class="pfield"><label>Должность</label><input type="text" placeholder="Ваша должность"></div>
+      <div class="pfield">
+        <label>Подразделение</label>
+        <select style="width:100%;padding:11px 14px;border-radius:8px;border:1.5px solid var(--gray-border);font-family:'Raleway',sans-serif;font-size:14px;outline:none;">
+          <option>US Holding</option><option>US Development</option><option>US Capital</option><option>US Academy</option><option>US Project</option><option>US Design</option><option>US Quality</option><option>US Construction</option><option>US Engineering</option><option>US Systems</option><option>US Industry</option><option>US Prime</option><option>US Trade</option><option>US Logistics</option><option>US Sales</option><option>US Media</option><option>US Service</option>
+        </select>
+      </div>
+      <button class="btn-save" onclick="saveProf()">Сохранить изменения</button>
+    </div>
+    <!-- PASSWORD -->
+    <div class="ptcont" id="tab-password">
+      <div class="pfield"><label>Текущий пароль</label><input type="password" placeholder="Текущий пароль"></div>
+      <div class="pfield"><label>Новый пароль</label><input type="password" placeholder="Минимум 8 символов"></div>
+      <div class="pfield"><label>Подтвердите пароль</label><input type="password" placeholder="Повторите новый пароль"></div>
+      <button class="btn-save" onclick="alert('Пароль успешно изменён')">Изменить пароль</button>
+    </div>
+    <!-- MAIL -->
+    <div class="ptcont" id="tab-mail">
+      <div class="mail-banner">
+        <div class="mb-icon">✉️</div>
+        <div class="mb-title">Корпоративная почта US Holding</div>
+        <p class="mb-text">Ваша корпоративная почта работает на платформе Microsoft 365.<br>Используйте корпоративный адрес для всей рабочей переписки.</p>
+        <div class="mb-addr" id="mbAddr"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="563f2037381623253e393a323f3831783d2c">[email&#160;protected]</a></div><br>
+        <a href="https://outlook.office.com" target="_blank" class="btn-mail">Открыть Outlook →</a>
+      </div>
+      <div class="mail-hint">
+        <strong>Как войти в почту:</strong><br>
+        1. Нажмите кнопку «Открыть Outlook» выше<br>
+        2. Введите корпоративный адрес: <strong id="mbAddrSm"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7c150a1d123c090f1413101815121b521706">[email&#160;protected]</a></strong><br>
+        3. Введите пароль (выдаётся администратором IT)<br>
+        4. Для телефона — скачайте приложение <strong>Microsoft Outlook</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPANY MODAL -->
+<div class="modal-overlay" id="mOverlay" onclick="closeMOut(event)">
+  <div class="modal">
+    <div class="mhead">
+      <div class="mco-logo">US</div>
+      <div class="mlabel" id="mLabel"></div>
+      <div class="mname" id="mName"></div>
+      <div class="mtagline" id="mTagline"></div>
+      <button class="mclose" onclick="closeM()">✕</button>
+    </div>
+    <div class="mbody">
+      <p class="mdesc" id="mDesc"></p>
+      <div class="msvc"><h4>Услуги и компетенции</h4><ul class="slist" id="mSvc"></ul></div>
+    </div>
+  </div>
+</div>
+
+<!-- AUTH MODAL -->
+<script>
+// STORAGE
+let cur = null;
+
+// NETLIFY IDENTITY
+netlifyIdentity.init();
+
+netlifyIdentity.on('login', user => {
+  const meta = user.user_metadata || {};
+  const fullName = meta.full_name || meta.name || user.email.split('@')[0];
+  const parts = fullName.trim().split(' ');
+  cur = { name: parts[0]||'', surname: parts.slice(1).join(' ')||'', email: user.email, niUser: user };
+  setLoggedIn(cur);
+  netlifyIdentity.close();
+});
+
+netlifyIdentity.on('logout', () => {
+  cur = null;
+  document.getElementById('authBtns').style.display='flex';
+  document.getElementById('userMenu').style.display='none';
+  document.getElementById('uDrop').classList.remove('open');
+  showMain();
+});
+
+window.addEventListener('load', () => {
+  const u = netlifyIdentity.currentUser();
+  if (u) {
+    const meta = u.user_metadata || {};
+    const fullName = meta.full_name || meta.name || u.email.split('@')[0];
+    const parts = fullName.trim().split(' ');
+    cur = { name: parts[0]||'', surname: parts.slice(1).join(' ')||'', email: u.email, niUser: u };
+    setLoggedIn(cur);
+  }
+  initReveal();
+});
+
+function setLoggedIn(u){
+  document.getElementById('authBtns').style.display='none';
+  document.getElementById('userMenu').style.display='block';
+  const ini=((u.name||'А')[0]+((u.surname||'')[0]||'')).toUpperCase();
+  document.getElementById('uAvNav').textContent=ini;
+  document.getElementById('uNmNav').textContent=u.name;
+  document.getElementById('dName').textContent=u.name+' '+(u.surname||'');
+  document.getElementById('dEmail').textContent=u.email;
+}
+function doLogout(){ netlifyIdentity.logout(); }
+function toggleDrop(){ document.getElementById('uDrop').classList.toggle('open'); }
+document.addEventListener('click',e=>{ const m=document.getElementById('userMenu'); if(m&&!m.contains(e.target)) document.getElementById('uDrop').classList.remove('open'); });
+
+// PROFILE
+function showProfile(tab){
+  document.getElementById('uDrop').classList.remove('open');
+  document.getElementById('mainSite').style.display='none';
+  document.getElementById('profilePage').classList.add('active');
+  if(cur){
+    const ini=((cur.name||'А')[0]+((cur.surname||'')[0]||'')).toUpperCase();
+    document.getElementById('profAvLg').textContent=ini;
+    document.getElementById('profNmDisp').textContent=cur.name+' '+(cur.surname||'');
+    document.getElementById('profEmDisp').textContent=cur.email;
+    document.getElementById('pfName').value=cur.name||'';
+    document.getElementById('pfSurname').value=cur.surname||'';
+    document.getElementById('pfEmail').value=cur.email;
+    document.getElementById('mbAddr').textContent=cur.email;
+    document.getElementById('mbAddrSm').textContent=cur.email;
+  }
+  switchTab(tab||'info'); window.scrollTo(0,0);
+}
+function showMain(){ document.getElementById('mainSite').style.display='block'; document.getElementById('profilePage').classList.remove('active'); }
+function switchTab(t){
+  const tabs=['info','password','mail'];
+  document.querySelectorAll('.ptab').forEach((b,i)=>b.classList.toggle('active',tabs[i]===t));
+  document.querySelectorAll('.ptcont').forEach(c=>c.classList.remove('active'));
+  const el=document.getElementById('tab-'+t); if(el) el.classList.add('active');
+}
+function saveProf(){
+  if(!cur) return;
+  cur.name=document.getElementById('pfName').value||cur.name;
+  cur.surname=document.getElementById('pfSurname').value||cur.surname;
+  const idx=users.findIndex(x=>x.email===cur.email);
+  if(idx>-1) users[idx]=cur;
+  localStorage.setItem('ush_u',JSON.stringify(users));
+  localStorage.setItem('ush_c',JSON.stringify(cur));
+  setLoggedIn(cur);
+  document.getElementById('profNmDisp').textContent=cur.name+' '+(cur.surname||'');
+  alert('Профиль сохранён');
+}
+
+// COMPANY MODAL
+const COS={
+  holding:{label:'Холдинг · 01',name:'Holding',tagline:'Центр стратегического управления группой',desc:'US Holding — головная компания группы. Обеспечивает финансовую устойчивость холдинга, осуществляет аудит, юридическую защиту активов и распределение инвестиционных потоков. Формирует единую миссию и ценности бренда на строительном рынке.',svc:['Стратегическое планирование','Корпоративное управление','Финансовый аудит','Юридическая защита активов','Управление инвестиционными потоками','Развитие бренда']},
+  development:{label:'Девелопмент · 02',name:'Development',tagline:'Девелопер полного цикла',desc:'US Development — подразделение по развитию строительных проектов. Специализируется на поиске перспективных участков, разработке концепций застройки и расчете экономической эффективности. Берет на себя полный цикл разрешительной документации и взаимодействие с государственными органами.',svc:['Поиск и анализ участков','Разработка концепций застройки','Технико-экономическое обоснование','Разрешительная документация','Взаимодействие с госорганами']},
+  capital:{label:'Инвестиции · 03',name:'Capital',tagline:'Инвестиционный департамент',desc:'US Capital — финансовое ядро группы, отвечающее за привлечение капитала и управление инвестициями. Работает с банковскими инструментами, частными инвесторами и государственными программами финансирования. Обеспечивает бесперебойный денежный поток для реализации масштабных объектов.',svc:['Привлечение капитала','Проектное финансирование','Работа с банками','Частные инвесторы','Государственные программы финансирования','Управление денежными потоками']},
+  academy:{label:'Обучение · 04',name:'Academy',tagline:'Корпоративный университет',desc:'US Academy — центр подготовки и развития профессиональных кадров. Готовит инженеров, прорабов и топ-менеджеров по уникальным внутренним стандартам качества US. Позволяет холдингу не зависеть от дефицита на рынке труда и гарантирует единство технологий на всех площадках.',svc:['Подготовка инженеров','Обучение прорабов','Развитие топ-менеджеров','Внутренние стандарты качества US','Корпоративный HR']},
+  project:{label:'Проектирование · 05',name:'Project',tagline:'Проектный институт',desc:'US Project — единый центр архитектурных и инженерных решений. Разрабатывает полный пакет проектно-сметной документации: от первых эскизов до сложнейших конструктивных расчетов. Сопровождает проекты в Госэкспертизе и осуществляет авторский надзор за точностью реализации идей.',svc:['Архитектурное проектирование','Конструктивные расчеты','Проектно-сметная документация','Прохождение Госэкспертизы','Авторский надзор']},
+  design:{label:'Дизайн · 06',name:'Design',tagline:'Бюро интерьера и ландшафта',desc:'US Design — бюро интерьера и ландшафта. Создает эстетический облик и коммерческую привлекательность объектов. Разрабатывает дизайн-проекты холлов, типовых квартир и офисных пространств. Отвечает за концепции благоустройства и ландшафтный дизайн.',svc:['Дизайн интерьеров','Ландшафтный дизайн','Дизайн холлов и общественных пространств','Концепции благоустройства','Типовые квартиры и офисы']},
+  quality:{label:'Контроль качества · 07',name:'Quality',tagline:'Служба технического надзора',desc:'US Quality — независимое подразделение контроля качества. Осуществляет жесткий мониторинг на всех этапах строительства, проверяя соответствие работ СНиПам и проектным решениям. Гарантирует надежность, безопасность и долговечность каждого здания.',svc:['Технический надзор','Проверка соответствия СНиПам','Мониторинг на всех этапах','Контроль проектных решений','Независимая инспекция']},
+  construction:{label:'Строительство · 08',name:'Construction',tagline:'Генеральный подрядчик',desc:'US Construction — главное строительное подразделение, координирующее все процессы на площадке. Управляет возведением объектов, координирует работу профильных подразделений и субподрядчиков. Отвечает за соблюдение графиков, технику безопасности и финальный ввод здания в эксплуатацию.',svc:['Генеральный подряд','Управление строительством','Координация субподрядчиков','Техника безопасности','Ввод объектов в эксплуатацию']},
+  engineering:{label:'Инфраструктура · 09',name:'Engineering',tagline:'Инфраструктурное строительство',desc:'US Engineering специализируется на создании внешней среды и магистральных сетей. Строит дороги, мосты и подводит коммуникации к объектам. Отвечает за энергетическую инфраструктуру: установку подстанций и прокладку ЛЭП.',svc:['Строительство дорог и мостов','Водоснабжение и теплотрассы','Электроподстанции','Прокладка ЛЭП','Внешние инженерные сети']},
+  systems:{label:'Инженерные системы · 10',name:'Systems',tagline:'Центр внутренних систем',desc:'US Systems — эксперт в области «интеллектуальной начинки» зданий. Занимается монтажом систем отопления, вентиляции, водопровода и канализации. Реализует цифровую инфраструктуру: слаботочные сети, скоростной интернет и системы безопасности.',svc:['Отопление и вентиляция','Водоснабжение и канализация','Слаботочные сети','Интернет-инфраструктура','Системы безопасности']},
+  industry:{label:'Промышленность · 11',name:'Industry',tagline:'Промышленное строительство',desc:'US Industry — подразделение по возведению индустриальных объектов: заводов, логистических хабов и складов. Специализируется на быстровозводимых конструкциях и промышленных полах. Учитывает специфические технологические требования производственных предприятий.',svc:['Промышленное строительство','Логистические хабы','Складские комплексы','Быстровозводимые конструкции','Промышленные полы']},
+  prime:{label:'Отделка · 12',name:'Prime',tagline:'Фит-аут и чистовая отделка',desc:'US Prime — компания фит-аута и отделки. Реализует финальный этап создания объекта. Выполняет стандартизированную чистовую отделку квартир и офисов «под ключ». Обеспечивает высокое качество материалов и эстетику финишных покрытий в классах Comfort и Business.',svc:['Чистовая отделка квартир','Отделка офисов под ключ','Класс Comfort','Класс Business','Финишные покрытия']},
+  trade:{label:'Снабжение · 13',name:'Trade',tagline:'Торговый дом и снабжение',desc:'US Trade — централизованный закупочный центр всей группы компаний. За счет прямого сотрудничества с заводами-изготовителями и больших объемов закупок обеспечивает холдинг материалами по минимальной себестоимости. Контролирует качество поставок и оптимизирует расходы на ресурсы.',svc:['Централизованные закупки','Прямые контракты с заводами','Оптовые поставки','Контроль качества поставок','Оптимизация расходов']},
+  logistics:{label:'Механизация · 14',name:'Logistics',tagline:'Механизация и логистика',desc:'US Logistics — технологическое ядро группы, владеющее собственным парком спецтехники. Обеспечивает объекты башенными кранами, экскаваторами и бетоносмесителями. Управляет цепочками поставок материалов, гарантируя техническую автономность холдинга.',svc:['Башенные краны','Экскаваторы и спецтехника','Бетоносмесители','Управление цепочками поставок','Логистика на объектах']},
+  sales:{label:'Продажи · 15',name:'Sales',tagline:'Департамент реализации',desc:'US Sales — внутреннее агентство недвижимости, ответственное за продажи и аренду построенных площадей. Эксперты подразделения сопровождают клиентов на всех этапах сделки, помогают с выбором планировок и оформлением ипотечных программ.',svc:['Продажи жилья','Аренда коммерческих площадей','Ипотечные программы','Юридическое сопровождение сделок','Брокеридж']},
+  media:{label:'Маркетинг · 16',name:'Media',tagline:'Маркетинговое агентство',desc:'US Media — творческий центр по продвижению бренда и проектов холдинга. Занимается позиционированием объектов на рынке, брендингом ЖК, рекламой и PR-сопровождением. Создает визуальный контент и управляет репутацией группы компаний в информационном пространстве.',svc:['Позиционирование объектов','Брендинг ЖК','Реклама и PR','Визуальный контент','Управление репутацией']},
+  service:{label:'Эксплуатация · 17',name:'Service',tagline:'Управляющая компания',desc:'US Service — сервисная служба по обслуживанию объектов после ввода в эксплуатацию. Обеспечивает безупречную работу всех систем ЖК и бизнес-центров, следит за чистотой, безопасностью и уютом. Работает в формате современного сервиса, оперативно решая любые бытовые вопросы жителей.',svc:['Управляющая компания','Техническое обслуживание систем','Клининг','Охрана объектов','Сервис для жителей']},
+};
+
+function openModal(k){
+  const c=COS[k];
+  document.getElementById('mLabel').textContent=c.label;
+  document.getElementById('mName').innerHTML='<span>US</span> '+c.name;
+  document.getElementById('mTagline').textContent=c.tagline;
+  document.getElementById('mDesc').textContent=c.desc;
+  document.getElementById('mSvc').innerHTML=c.svc.map(s=>`<li>${s}</li>`).join('');
+  document.getElementById('mOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeM(){ document.getElementById('mOverlay').classList.remove('open'); document.body.style.overflow=''; }
+function closeMOut(e){ if(e.target===document.getElementById('mOverlay')) closeM(); }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeM(); closeAuth(); } });
+
+// FORM
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const form = this;
+  const btn = form.querySelector('.btn-submit');
+  btn.disabled = true;
+  btn.textContent = 'Отправка...';
+  const data = new FormData(form);
+  fetch('/', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: new URLSearchParams(data).toString()
+  })
+  .then(() => {
+    form.style.display = 'none';
+    document.getElementById('fSuccess').classList.add('show');
+  })
+  .catch(() => {
+    btn.disabled = false;
+    btn.textContent = 'Отправить заявку';
+    alert('Произошла ошибка. Пожалуйста, попробуйте ещё раз или напишите нам на info@usholding.kz');
+  });
+});
+</script>
+</body>
+</html>
