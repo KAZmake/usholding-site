@@ -638,7 +638,7 @@ let __clerk = null;
 (async () => {
   await new Promise(resolve => {
     const s = document.createElement('script');
-    s.src = 'https://cdn.jsdelivr.net/npm/@clerk/clerk-js@5/dist/clerk.browser.js';
+    s.src = 'https://cdn.jsdelivr.net/npm/@clerk/clerk-js@4/dist/clerk.browser.js';
     s.onload = resolve;
     document.head.appendChild(s);
   });
