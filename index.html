@@ -332,7 +332,7 @@ footer{background:var(--navy-dark);padding:56px 60px;}
       <span class="mail-icon">✉</span> Почта
     </a>
     <div id="authBtns" style="display:flex;gap:10px;">
-      <button class="btn-login" onclick="netlifyIdentity.open()">Войти</button>
+      <button class="btn-login" onclick="doLogin()">Войти</button>
     </div>
     <div class="user-menu" id="userMenu" style="display:none;">
       <button class="user-btn" onclick="toggleDrop()">
@@ -628,39 +628,23 @@ footer{background:var(--navy-dark);padding:56px 60px;}
   </div>
 </div>
 
-<!-- AUTH MODAL -->
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<!-- AUTH -->
+<script src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js" type="text/javascript"></script>
 <script>
 // STORAGE
 let cur = null;
 
-// NETLIFY IDENTITY
-netlifyIdentity.init();
+// CLERK
+const __clerkPk = 'pk_test_bm9ybWFsLXNjdWxwaW4tMzUuY2xlcmsuYWNjb3VudHMuZGV2JA';
+const __clerk = new window.Clerk(__clerkPk);
 
-netlifyIdentity.on('login', user => {
-  const meta = user.user_metadata || {};
-  const fullName = meta.full_name || meta.name || user.email.split('@')[0];
-  const parts = fullName.trim().split(' ');
-  cur = { name: parts[0]||'', surname: parts.slice(1).join(' ')||'', email: user.email, niUser: user };
-  setLoggedIn(cur);
-  netlifyIdentity.close();
-});
-
-netlifyIdentity.on('logout', () => {
-  cur = null;
-  document.getElementById('authBtns').style.display='flex';
-  document.getElementById('userMenu').style.display='none';
-  document.getElementById('uDrop').classList.remove('open');
-  showMain();
-});
-
-window.addEventListener('load', () => {
-  const u = netlifyIdentity.currentUser();
-  if (u) {
-    const meta = u.user_metadata || {};
-    const fullName = meta.full_name || meta.name || u.email.split('@')[0];
-    const parts = fullName.trim().split(' ');
-    cur = { name: parts[0]||'', surname: parts.slice(1).join(' ')||'', email: u.email, niUser: u };
+__clerk.load().then(() => {
+  if (__clerk.user) {
+    const u = __clerk.user;
+    const name = u.firstName || u.emailAddresses[0]?.emailAddress?.split('@')[0] || '';
+    const surname = u.lastName || '';
+    const email = u.emailAddresses[0]?.emailAddress || '';
+    cur = { name, surname, email };
     setLoggedIn(cur);
   }
 });
@@ -674,7 +658,16 @@ function setLoggedIn(u){
   document.getElementById('dName').textContent=u.name+' '+(u.surname||'');
   document.getElementById('dEmail').textContent=u.email;
 }
-function doLogout(){ netlifyIdentity.logout(); }
+function doLogin(){ __clerk.openSignIn(); }
+function doLogout(){
+  __clerk.signOut().then(() => {
+    cur = null;
+    document.getElementById('authBtns').style.display='flex';
+    document.getElementById('userMenu').style.display='none';
+    document.getElementById('uDrop').classList.remove('open');
+    showMain();
+  });
+}
 function toggleDrop(){ document.getElementById('uDrop').classList.toggle('open'); }
 document.addEventListener('click',e=>{ const m=document.getElementById('userMenu'); if(m&&!m.contains(e.target)) document.getElementById('uDrop').classList.remove('open'); });
 
