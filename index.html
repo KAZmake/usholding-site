@@ -668,7 +668,7 @@ function setLoggedIn(u){
   document.getElementById('dName').textContent=u.name+' '+(u.surname||'');
   document.getElementById('dEmail').textContent=u.email;
 }
-function doLogin(){ if(__clerk) __clerk.openSignIn({ afterSignInUrl: window.location.href }); else setTimeout(doLogin, 200); }
+function doLogin(){ if(__clerk) __clerk.redirectToSignIn({ redirectUrl: window.location.href }); else setTimeout(doLogin, 200); }
 function doLogout(){
   __clerk.signOut().then(() => {
     cur = null;
