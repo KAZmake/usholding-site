@@ -582,6 +582,7 @@ footer{background:var(--navy-dark);padding:56px 60px;}
           <option>US Holding</option><option>US Development</option><option>US Capital</option><option>US Academy</option><option>US Project</option><option>US Design</option><option>US Quality</option><option>US Construction</option><option>US Engineering</option><option>US Systems</option><option>US Industry</option><option>US Prime</option><option>US Trade</option><option>US Logistics</option><option>US Sales</option><option>US Media</option><option>US Service</option>
         </select>
       </div>
+      <div id="profMsg" style="font-size:13px;margin-bottom:8px;"></div>
       <button class="btn-save" onclick="saveProf()">Сохранить изменения</button>
     </div>
     <!-- PASSWORD -->
@@ -721,7 +722,9 @@ async function savePass(){
     document.getElementById('pfNewPass').value='';
     document.getElementById('pfConfPass').value='';
   } catch(e){
-    msg.style.color='#c00'; msg.textContent=e.errors?.[0]?.message||'Ошибка. Проверьте текущий пароль';
+    const code = e.errors?.[0]?.code||'';
+    msg.style.color='#c00';
+    msg.textContent = code==='form_password_incorrect' ? 'Текущий пароль введён некорректно' : 'Ошибка. Проверьте текущий пароль';
   }
 }
 function saveProf(){
@@ -734,7 +737,9 @@ function saveProf(){
   localStorage.setItem('ush_c',JSON.stringify(cur));
   setLoggedIn(cur);
   document.getElementById('profNmDisp').textContent=cur.name+' '+(cur.surname||'');
-  alert('Профиль сохранён');
+  const pm=document.getElementById('profMsg');
+  pm.style.color='#1a7a3a'; pm.textContent='Изменения сохранены';
+  setTimeout(()=>{ pm.textContent=''; }, 3000);
 }
 
 // COMPANY MODAL
