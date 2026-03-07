@@ -699,7 +699,7 @@ function showProfile(tab){
     document.getElementById('pfEmail').value=cur.email;
     document.getElementById('mbAddr').textContent=cur.email;
     document.getElementById('mbAddrSm').textContent=cur.email;
-    const meta=__clerk.user?.publicMetadata||{};
+    const meta=__clerk.user?.unsafeMetadata||{};
     if(meta.phone) document.getElementById('pfPhone').value=meta.phone;
     if(meta.position) document.getElementById('pfPosition').value=meta.position;
     if(meta.dept){ const s=document.getElementById('pfDept'); for(let o of s.options) if(o.value===meta.dept){s.value=meta.dept;break;} }
@@ -734,21 +734,21 @@ async function savePass(){
 }
 async function saveProf(){
   if(!cur) return;
-  cur.name=document.getElementById('pfName').value||cur.name;
-  cur.surname=document.getElementById('pfSurname').value||cur.surname;
+  const name=document.getElementById('pfName').value||cur.name;
+  const surname=document.getElementById('pfSurname').value||cur.surname||'';
   const phone=document.getElementById('pfPhone').value;
   const position=document.getElementById('pfPosition').value;
   const dept=document.getElementById('pfDept').value;
-  setLoggedIn(cur);
-  document.getElementById('profNmDisp').textContent=cur.name+' '+(cur.surname||'');
   const pm=document.getElementById('profMsg');
   try {
-    const token = await __clerk.session.getToken();
-    await fetch('/api/update-profile', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ token, phone, position, dept })
+    await __clerk.user.update({
+      firstName: name,
+      lastName: surname,
+      unsafeMetadata: { phone, position, dept }
     });
+    cur.name=name; cur.surname=surname;
+    setLoggedIn(cur);
+    document.getElementById('profNmDisp').textContent=name+' '+surname;
     pm.style.color='#1a7a3a'; pm.textContent='Изменения сохранены';
   } catch(e) {
     pm.style.color='#c00'; pm.textContent='Ошибка сохранения';
