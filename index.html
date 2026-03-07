@@ -640,17 +640,19 @@ let cur = null;
 let __clerk = null;
 
 // CLERK
+function applyClerkUser(u){
+  if(!u){ cur=null; document.getElementById('authBtns').style.display='flex'; document.getElementById('userMenu').style.display='none'; document.getElementById('uDrop').classList.remove('open'); showMain(); return; }
+  const name = u.firstName || u.emailAddresses[0]?.emailAddress?.split('@')[0] || '';
+  const surname = u.lastName || '';
+  const email = u.emailAddresses[0]?.emailAddress || '';
+  cur = { name, surname, email };
+  setLoggedIn(cur);
+}
 window.addEventListener('load', async () => {
   await window.Clerk.load();
   __clerk = window.Clerk;
-  if (__clerk.user) {
-    const u = __clerk.user;
-    const name = u.firstName || u.emailAddresses[0]?.emailAddress?.split('@')[0] || '';
-    const surname = u.lastName || '';
-    const email = u.emailAddresses[0]?.emailAddress || '';
-    cur = { name, surname, email };
-    setLoggedIn(cur);
-  }
+  applyClerkUser(__clerk.user);
+  __clerk.addListener(({ user }) => applyClerkUser(user));
 });
 
 function setLoggedIn(u){
