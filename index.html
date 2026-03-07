@@ -663,7 +663,7 @@ function setLoggedIn(u){
   document.getElementById('dName').textContent=u.name+' '+(u.surname||'');
   document.getElementById('dEmail').textContent=u.email;
 }
-function doLogin(){ __clerk.openSignIn(); }
+function doLogin(){ if(__clerk) __clerk.openSignIn(); else setTimeout(doLogin, 200); }
 function doLogout(){
   __clerk.signOut().then(() => {
     cur = null;
