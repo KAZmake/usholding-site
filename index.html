@@ -629,16 +629,21 @@ footer{background:var(--navy-dark);padding:56px 60px;}
 </div>
 
 <!-- AUTH -->
-<script src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js" type="text/javascript"></script>
 <script>
 // STORAGE
 let cur = null;
+let __clerk = null;
 
 // CLERK
-const __clerkPk = 'pk_test_bm9ybWFsLXNjdWxwaW4tMzUuY2xlcmsuYWNjb3VudHMuZGV2JA';
-const __clerk = new window.Clerk(__clerkPk);
-
-__clerk.load().then(() => {
+(async () => {
+  await new Promise(resolve => {
+    const s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/@clerk/clerk-js@5/dist/clerk.browser.js';
+    s.onload = resolve;
+    document.head.appendChild(s);
+  });
+  __clerk = new window.Clerk('pk_test_bm9ybWFsLXNjdWxwaW4tMzUuY2xlcmsuYWNjb3VudHMuZGV2JA');
+  await __clerk.load();
   if (__clerk.user) {
     const u = __clerk.user;
     const name = u.firstName || u.emailAddresses[0]?.emailAddress?.split('@')[0] || '';
@@ -647,7 +652,7 @@ __clerk.load().then(() => {
     cur = { name, surname, email };
     setLoggedIn(cur);
   }
-});
+})();
 
 function setLoggedIn(u){
   document.getElementById('authBtns').style.display='none';
