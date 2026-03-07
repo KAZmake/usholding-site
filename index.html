@@ -586,10 +586,11 @@ footer{background:var(--navy-dark);padding:56px 60px;}
     </div>
     <!-- PASSWORD -->
     <div class="ptcont" id="tab-password">
-      <div class="pfield"><label>Текущий пароль</label><input type="password" placeholder="Текущий пароль"></div>
-      <div class="pfield"><label>Новый пароль</label><input type="password" placeholder="Минимум 8 символов"></div>
-      <div class="pfield"><label>Подтвердите пароль</label><input type="password" placeholder="Повторите новый пароль"></div>
-      <button class="btn-save" onclick="alert('Пароль успешно изменён')">Изменить пароль</button>
+      <div class="pfield"><label>Текущий пароль</label><input type="password" id="pfCurPass" placeholder="Текущий пароль"></div>
+      <div class="pfield"><label>Новый пароль</label><input type="password" id="pfNewPass" placeholder="Минимум 8 символов"></div>
+      <div class="pfield"><label>Подтвердите пароль</label><input type="password" id="pfConfPass" placeholder="Повторите новый пароль"></div>
+      <div id="passMsg" style="font-size:13px;margin-bottom:8px;"></div>
+      <button class="btn-save" onclick="savePass()">Изменить пароль</button>
     </div>
     <!-- MAIL -->
     <div class="ptcont" id="tab-mail">
@@ -705,6 +706,23 @@ function switchTab(t){
   document.querySelectorAll('.ptab').forEach((b,i)=>b.classList.toggle('active',tabs[i]===t));
   document.querySelectorAll('.ptcont').forEach(c=>c.classList.remove('active'));
   const el=document.getElementById('tab-'+t); if(el) el.classList.add('active');
+}
+async function savePass(){
+  const cur_p = document.getElementById('pfCurPass').value;
+  const new_p = document.getElementById('pfNewPass').value;
+  const conf_p = document.getElementById('pfConfPass').value;
+  const msg = document.getElementById('passMsg');
+  if(!new_p || new_p.length < 8){ msg.style.color='#c00'; msg.textContent='Новый пароль минимум 8 символов'; return; }
+  if(new_p !== conf_p){ msg.style.color='#c00'; msg.textContent='Пароли не совпадают'; return; }
+  try{
+    await __clerk.user.updatePassword({ currentPassword: cur_p, newPassword: new_p, signOutOfOtherSessions: false });
+    msg.style.color='#1a7a3a'; msg.textContent='Пароль успешно изменён';
+    document.getElementById('pfCurPass').value='';
+    document.getElementById('pfNewPass').value='';
+    document.getElementById('pfConfPass').value='';
+  } catch(e){
+    msg.style.color='#c00'; msg.textContent=e.errors?.[0]?.message||'Ошибка. Проверьте текущий пароль';
+  }
 }
 function saveProf(){
   if(!cur) return;
