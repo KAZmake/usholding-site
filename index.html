@@ -652,8 +652,11 @@ window.addEventListener('load', async () => {
   await window.Clerk.load();
   __clerk = window.Clerk;
   __clerk.addListener(({ user }) => applyClerkUser(user));
-  setTimeout(() => { if(!cur && __clerk.user) applyClerkUser(__clerk.user); }, 500);
-  setTimeout(() => { if(!cur && __clerk.user) applyClerkUser(__clerk.user); }, 2000);
+  const poll = setInterval(() => {
+    if(cur){ clearInterval(poll); return; }
+    if(__clerk.user){ applyClerkUser(__clerk.user); clearInterval(poll); }
+  }, 300);
+  setTimeout(() => clearInterval(poll), 15000);
 });
 
 function setLoggedIn(u){
