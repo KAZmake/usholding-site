@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/png" href="logo/US.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>US Holding — Группа компаний</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -574,11 +575,11 @@ footer{background:var(--navy-dark);padding:56px 60px;}
         <div class="pfield"><label>Фамилия</label><input type="text" id="pfSurname" placeholder="Фамилия"></div>
       </div>
       <div class="pfield"><label>Email (логин)</label><input type="email" id="pfEmail" readonly></div>
-      <div class="pfield"><label>Телефон</label><input type="tel" placeholder="+7 (___) ___-__-__"></div>
-      <div class="pfield"><label>Должность</label><input type="text" placeholder="Ваша должность"></div>
+      <div class="pfield"><label>Телефон</label><input type="tel" id="pfPhone" placeholder="+7 (___) ___-__-__"></div>
+      <div class="pfield"><label>Должность</label><input type="text" id="pfPosition" placeholder="Ваша должность"></div>
       <div class="pfield">
         <label>Подразделение</label>
-        <select style="width:100%;padding:11px 14px;border-radius:8px;border:1.5px solid var(--gray-border);font-family:'Raleway',sans-serif;font-size:14px;outline:none;">
+        <select id="pfDept" style="width:100%;padding:11px 14px;border-radius:8px;border:1.5px solid var(--gray-border);font-family:'Raleway',sans-serif;font-size:14px;outline:none;">
           <option>US Holding</option><option>US Development</option><option>US Capital</option><option>US Academy</option><option>US Project</option><option>US Design</option><option>US Quality</option><option>US Construction</option><option>US Engineering</option><option>US Systems</option><option>US Industry</option><option>US Prime</option><option>US Trade</option><option>US Logistics</option><option>US Sales</option><option>US Media</option><option>US Service</option>
         </select>
       </div>
@@ -698,6 +699,10 @@ function showProfile(tab){
     document.getElementById('pfEmail').value=cur.email;
     document.getElementById('mbAddr').textContent=cur.email;
     document.getElementById('mbAddrSm').textContent=cur.email;
+    const meta=__clerk.user?.publicMetadata||{};
+    if(meta.phone) document.getElementById('pfPhone').value=meta.phone;
+    if(meta.position) document.getElementById('pfPosition').value=meta.position;
+    if(meta.dept){ const s=document.getElementById('pfDept'); for(let o of s.options) if(o.value===meta.dept){s.value=meta.dept;break;} }
   }
   switchTab(tab||'info'); window.scrollTo(0,0);
 }
@@ -727,18 +732,27 @@ async function savePass(){
     msg.textContent = code==='form_password_incorrect' ? 'Текущий пароль введён некорректно' : 'Ошибка. Проверьте текущий пароль';
   }
 }
-function saveProf(){
+async function saveProf(){
   if(!cur) return;
   cur.name=document.getElementById('pfName').value||cur.name;
   cur.surname=document.getElementById('pfSurname').value||cur.surname;
-  const idx=users.findIndex(x=>x.email===cur.email);
-  if(idx>-1) users[idx]=cur;
-  localStorage.setItem('ush_u',JSON.stringify(users));
-  localStorage.setItem('ush_c',JSON.stringify(cur));
+  const phone=document.getElementById('pfPhone').value;
+  const position=document.getElementById('pfPosition').value;
+  const dept=document.getElementById('pfDept').value;
   setLoggedIn(cur);
   document.getElementById('profNmDisp').textContent=cur.name+' '+(cur.surname||'');
   const pm=document.getElementById('profMsg');
-  pm.style.color='#1a7a3a'; pm.textContent='Изменения сохранены';
+  try {
+    const token = await __clerk.session.getToken();
+    await fetch('/api/update-profile', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ token, phone, position, dept })
+    });
+    pm.style.color='#1a7a3a'; pm.textContent='Изменения сохранены';
+  } catch(e) {
+    pm.style.color='#c00'; pm.textContent='Ошибка сохранения';
+  }
   setTimeout(()=>{ pm.textContent=''; }, 3000);
 }
 
