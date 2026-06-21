@@ -3,7 +3,7 @@
 ## Active work
 | Agent   | Task | Status | Started |
 |---------|------|--------|---------|
-| orchestrator | Фаза 0 | in progress | 2026-06-21 |
+| orchestrator | Фаза 0 завершена, переход к Фазе 1 | in progress | 2026-06-21 |
 
 ## Decisions
 <!-- Ключевые технические решения -->
@@ -21,3 +21,6 @@
 - Задача 0.1: Создать проект Next.js 15 (App Router, TS strict, Tailwind CSS v4) — Next.js 15.5.19, React 19, src/ layout
 - Задача 0.2: Перенести статику в public/, настроить app/favicon.ico и app/icon.png
 - Задача 0.3: ESLint 9 (flat config) + Prettier + prettier-plugin-tailwindcss + Husky pre-commit + lint-staged — lint, format:check, typecheck все проходят
+- Задача 0.4: .env.example со всеми переменными (Clerk, Supabase, Web3Forms)
+- Задача 0.5: netlify.toml → Next.js Runtime (`npm run build`, @netlify/plugin-nextjs)
+- Задача 0.6: Удалена functions/api/update-profile.js (орфанный Cloudflare код)
