@@ -44,11 +44,11 @@
 - [x] Задача 4.3: Добавить серверную валидацию (`zod`) и rate-limit по IP в дополнение к существующему honeypot-полю `botcheck`
 
 ## Фаза 5: SEO, производительность и надёжность
-- [ ] Задача 5.1: Добавить `robots.txt`, `app/sitemap.ts`, `manifest.json` (иконки уже перенесены в Задаче 0.2)
-- [ ] Задача 5.2: Добавить `<meta name="description">`, Open Graph/Twitter Card, JSON-LD `Organization` (+ `subOrganization` на каждую из 17 компаний) — сейчас в `<head>` нет ни одного из этих тегов
-- [ ] Задача 5.3: Добиться бюджета Core Web Vitals (LCP < 2.5s, CLS < 0.1, INP < 200ms) за счёт `next/image`, `font-display: swap`, предзагрузки hero-изображения, переноса Clerk-скрипта на `@clerk/nextjs` (убирает блокирующий `<script src=".../latest/...">`)
-- [ ] Задача 5.4: Подключить Lighthouse CI в GitHub Actions с порогом производительности — провал сборки при регрессии
-- [ ] Задача 5.5: Подключить Sentry (frontend + Route Handlers) для отслеживания ошибок на проде
+- [x] Задача 5.1: Добавить `robots.txt`, `app/sitemap.ts`, `manifest.json` (иконки уже перенесены в Задаче 0.2)
+- [x] Задача 5.2: Добавить `<meta name="description">`, Open Graph/Twitter Card, JSON-LD `Organization` (+ `subOrganization` на каждую из 17 компаний) — сейчас в `<head>` нет ни одного из этих тегов
+- [x] Задача 5.3: Добиться бюджета Core Web Vitals (LCP < 2.5s, CLS < 0.1, INP < 200ms) за счёт `next/image`, `font-display: swap`, предзагрузки hero-изображения, переноса Clerk-скрипта на `@clerk/nextjs` (убирает блокирующий `<script src=".../latest/...">`)
+- [x] Задача 5.4: Подключить Lighthouse CI в GitHub Actions с порогом производительности — провал сборки при регрессии
+- [x] Задача 5.5: Подключить Sentry (frontend + Route Handlers) для отслеживания ошибок на проде
 
 ## Фаза 6: Тесты и CI/CD
 - [ ] Задача 6.1: Настроить Vitest для unit-тестов утилит и Route Handler'ов

@@ -3,7 +3,7 @@
 ## Active work
 | Agent   | Task | Status | Started |
 |---------|------|--------|---------|
-| orchestrator | Фазы 0-4 завершены, переход к Фазе 5 | in progress | 2026-06-21 |
+| orchestrator | Фазы 0-5 завершены, переход к Фазе 6 | in progress | 2026-06-21 |
 
 ## Decisions
 <!-- Ключевые технические решения -->
@@ -15,7 +15,13 @@
 - 2026-06-21: Репозиторий `usholding-site` сделан публичным (был приватным) — иначе GitHub Pages недоступен без платного плана. Перед сменой видимости вся история (27 коммитов, все ветки) проверена на секреты — найдены только публичные ключи Clerk (`pk_live_`/`pk_test_`, по дизайну предназначены для клиента) и одно упоминание имени переменной `env.CLERK_SECRET_KEY` без значения. Реального риска утечки нет.
 
 ## Blockers
-<!-- Что блокирует работу -->
+<!-- Что блокирует работу. Каждый блокер пересылается в Telegram-бота —
+     пиши конкретно: что нужно сделать человеку и что вернуть в ответ. -->
+
+## Human Input
+<!-- Ответы пользователя на блокеры, приходят сюда автоматически из Telegram.
+     Перед началом новой задачи проверяй эту секцию: если есть ответ на твой
+     блокер — используй его, реализуй и убери соответствующий пункт из Blockers. -->
 
 ## Completed today
 - Задача 0.1: Создать проект Next.js 15 (App Router, TS strict, Tailwind CSS v4) — Next.js 15.5.19, React 19, src/ layout
@@ -40,3 +46,8 @@
 - Задача 3.4: Route Handler GET/PUT /api/profile с серверной проверкой сессии
 - Задача 3.5: Route Handler PUT /api/profile/password с русскими сообщениями об ошибках
 - Задача 4.1-4.3: Route Handler /api/contact (Web3Forms + Supabase leads + zod + rate-limit + honeypot)
+- Задача 5.1: robots.ts, sitemap.ts, manifest.json
+- Задача 5.2: Open Graph, Twitter Card, JSON-LD Organization (17 subOrganizations)
+- Задача 5.3: Core Web Vitals verified (priority images, font-display swap, no blocking scripts)
+- Задача 5.4: Lighthouse CI GitHub Action (perf >= 0.8, SEO >= 0.9)
+- Задача 5.5: Sentry (client + server + edge + global-error handler)

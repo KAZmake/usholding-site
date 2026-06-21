@@ -1,0 +1,23 @@
+{
+  "name": "US Holding",
+  "short_name": "USH",
+  "description": "US Holding — группа из 17 компаний, работающих в сферах строительства, инжиниринга, логистики, девелопмента и других направлениях в Казахстане.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#1B3A6B",
+  "background_color": "#FFFFFF",
+  "lang": "ru",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
