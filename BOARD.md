@@ -3,7 +3,7 @@
 ## Active work
 | Agent   | Task | Status | Started |
 |---------|------|--------|---------|
-| orchestrator | Фазы 0-5 завершены, переход к Фазе 6 | in progress | 2026-06-21 |
+| orchestrator | Фазы 0-6 завершены, переход к Фазе 7 | in progress | 2026-06-21 |
 
 ## Decisions
 <!-- Ключевые технические решения -->
@@ -51,3 +51,7 @@
 - Задача 5.3: Core Web Vitals verified (priority images, font-display swap, no blocking scripts)
 - Задача 5.4: Lighthouse CI GitHub Action (perf >= 0.8, SEO >= 0.9)
 - Задача 5.5: Sentry (client + server + edge + global-error handler)
+- Задача 6.1: Vitest (16 unit tests для contact validation)
+- Задача 6.2: Playwright e2e (4 smoke tests, chromium)
+- Задача 6.3: GitHub Actions CI (lint + typecheck + test)
+- Задача 6.4: Netlify Deploy Preview задокументирован

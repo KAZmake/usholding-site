@@ -2,6 +2,7 @@ node_modules
 .next
 public
 *.md
+e2e/
 # Production site files — do not touch
 index.html
 images/
