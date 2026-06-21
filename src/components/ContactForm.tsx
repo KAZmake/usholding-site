@@ -2,9 +2,6 @@
 
 import { useState, FormEvent } from 'react';
 
-const WEB3FORMS_KEY =
-  process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? 'bce70d0b-dc4c-405a-90f4-09c84959d4a0';
-
 const directions = [
   'US Holding — общие вопросы',
   'US Development — девелопмент',
@@ -39,21 +36,24 @@ export function ContactForm() {
     data.forEach((value, key) => {
       if (typeof value === 'string') body[key] = value;
     });
-    body['access_key'] = WEB3FORMS_KEY;
-    body['subject'] = 'Новая заявка с сайта US Holding';
-    body['from_name'] = 'US Holding Site';
 
     try {
-      await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        throw new Error(err?.error || 'Ошибка отправки');
+      }
       setSubmitted(true);
-    } catch {
+    } catch (err) {
       setSubmitting(false);
       alert(
-        'Произошла ошибка. Пожалуйста, попробуйте ещё раз или напишите нам на info@usholding.kz',
+        err instanceof Error
+          ? err.message
+          : 'Произошла ошибка. Пожалуйста, попробуйте ещё раз или напишите нам на info@usholding.kz',
       );
     }
   }
@@ -251,11 +251,12 @@ export function ContactForm() {
                 />
               </div>
               <div>
-                <label style={labelStyle}>Email</label>
+                <label style={labelStyle}>Email *</label>
                 <input
                   type="email"
                   name="email"
                   placeholder="email@example.com"
+                  required
                   style={inputStyle}
                   className="form-input"
                 />
@@ -281,6 +282,15 @@ export function ContactForm() {
                 className="form-input"
               />
             </div>
+
+            {/* Honeypot — hidden from humans, bots fill it */}
+            <input
+              type="text"
+              name="botcheck"
+              style={{ display: 'none' }}
+              tabIndex={-1}
+              autoComplete="off"
+            />
 
             <button
               type="submit"

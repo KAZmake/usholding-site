@@ -3,7 +3,7 @@
 ## Active work
 | Agent   | Task | Status | Started |
 |---------|------|--------|---------|
-| orchestrator | Фазы 0-3 завершены, переход к Фазе 4 | in progress | 2026-06-21 |
+| orchestrator | Фазы 0-4 завершены, переход к Фазе 5 | in progress | 2026-06-21 |
 
 ## Decisions
 <!-- Ключевые технические решения -->
@@ -39,3 +39,4 @@
 - Задача 3.3: Webhook handler (user.created/updated → user_profile_extra)
 - Задача 3.4: Route Handler GET/PUT /api/profile с серверной проверкой сессии
 - Задача 3.5: Route Handler PUT /api/profile/password с русскими сообщениями об ошибках
+- Задача 4.1-4.3: Route Handler /api/contact (Web3Forms + Supabase leads + zod + rate-limit + honeypot)
