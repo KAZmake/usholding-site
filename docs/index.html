@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>US Holding Site v2 — Дашборд разработки</title>
+<style>
+:root {
+  --primary:#1B4F8A; --bg:#EEF2F9; --done:#166534; --active:#1B4F8A; --todo:#64748B;
+  --card:#FFFFFF; --border:#D8E0EE; --text:#1A2438; --text-light:#5B6B85;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;}
+.wrap{max-width:1180px;margin:0 auto;padding:32px 20px 60px;}
+header{margin-bottom:28px;}
+h1{font-size:26px;font-weight:700;color:var(--primary);}
+.updated{font-size:13px;color:var(--text-light);margin-top:6px;}
+.subtitle{font-size:14px;color:var(--text-light);margin-top:4px;}
+
+.overall{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px 26px;margin-bottom:32px;box-shadow:0 2px 10px rgba(27,79,138,0.06);}
+.overall-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;flex-wrap:wrap;gap:6px;}
+#overall-label{font-size:15px;font-weight:600;color:var(--text);}
+#overall-pct{font-size:22px;font-weight:700;color:var(--primary);}
+.overall-bar{height:10px;background:var(--bg);border-radius:6px;overflow:hidden;}
+#overall-fill{height:100%;background:var(--primary);border-radius:6px;width:0%;transition:width .3s;}
+#overall-sub{font-size:12px;color:var(--text-light);margin-top:8px;}
+
+.phase-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;}
+.phase-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 22px;box-shadow:0 2px 10px rgba(27,79,138,0.05);display:flex;flex-direction:column;}
+.phase-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px;}
+.phase-name{font-size:16px;font-weight:700;color:var(--primary);}
+.phase-subtitle{font-size:12.5px;color:var(--text-light);margin-top:2px;}
+
+.badge{font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;white-space:nowrap;}
+.badge-todo{background:#EEF1F5;color:var(--todo);}
+.badge-active{background:#E5EDF8;color:var(--active);}
+.badge-done{background:#E3F1E8;color:var(--done);}
+
+.phase-progress{height:7px;background:var(--bg);border-radius:5px;overflow:hidden;margin-bottom:14px;}
+.phase-progress-fill{height:100%;background:var(--primary);border-radius:5px;transition:width .3s;}
+
+.task-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:14px;flex:1;}
+.task{display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:var(--text);}
+.task-icon{flex-shrink:0;font-size:14px;line-height:1.4;}
+.task-icon.todo{color:var(--todo);}
+.task-icon.done{color:var(--done);}
+.task.task-done .task-text{color:var(--text-light);text-decoration:line-through;}
+
+.phase-footer{font-size:12px;color:var(--text-light);border-top:1px solid var(--border);padding-top:10px;}
+
+footer{margin-top:40px;text-align:center;font-size:12px;color:var(--text-light);}
+footer a{color:var(--primary);text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>US Holding Site v2 — Дашборд разработки</h1>
+    <div class="subtitle">Миграция usholding.kz на Next.js + Supabase + Clerk SDK</div>
+    <div class="updated">Обновлено: 21.06.2026 12:56</div>
+  </header>
+
+  <div class="overall">
+    <div class="overall-top">
+      <span id="overall-label">Общий прогресс — 0 из 42 задач выполнено</span>
+      <span id="overall-pct">0%</span>
+    </div>
+    <div class="overall-bar"><div id="overall-fill" style="width:0%"></div></div>
+    <div id="overall-sub">0 / 42</div>
+  </div>
+
+  <div class="phase-grid">
+      <div class="phase-card">
+        <div class="phase-head">
+          <div>
+            <div class="phase-name">Фаза 0</div>
+            <div class="phase-subtitle">Аудит и инфраструктура репозитория</div>
+          </div>
+          <span class="badge badge-todo">Не начато</span>
+        </div>
+        <div class="phase-progress"><div class="phase-progress-fill" style="width:0%"></div></div>
+        <ul class="task-list">
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Создать проект Next.js 15 (App Router, TypeScript, Tailwind) в ветке rebuild</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Перенести статику в public/, настроить иконки через Next.js (icon.png/favicon.ico)</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Настроить ESLint + Prettier + TypeScript strict + Husky pre-commit</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Создать .env.example (Clerk, Supabase, Web3Forms ключи)</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Настроить netlify.toml под Next.js Runtime (@netlify/plugin-nextjs)</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Удалить орфанную functions/api/update-profile.js (формат Cloudflare, не работает на Netlify)</span></li>
+        </ul>
+        <div class="phase-footer">0 из 6 задач выполнено</div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-head">
+          <div>
+            <div class="phase-name">Фаза 1</div>
+            <div class="phase-subtitle">Дизайн-система и вёрстка</div>
+          </div>
+          <span class="badge badge-todo">Не начато</span>
+        </div>
+        <div class="phase-progress"><div class="phase-progress-fill" style="width:0%"></div></div>
+        <ul class="task-list">
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Перенести CSS-переменные в tailwind.config.ts и globals.css</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Собрать компоненты: Nav, Hero, About, CompanyCard, CompanyModal, PortfolioCard, WhySection, ContactForm, Footer, UserMenu</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Перенести секции hero/about/companies/portfolio/why/contact 1:1</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Заменить base64-плейсхолдеры портфолио на реальные фото через next/image</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Все изображения → next/image с width/height, sizes, priority для hero</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Убрать мёртвый CSS .reveal/.reveal.visible или реализовать анимацию через IntersectionObserver</span></li>
+        </ul>
+        <div class="phase-footer">0 из 6 задач выполнено</div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-head">
+          <div>
+            <div class="phase-name">Фаза 2</div>
+            <div class="phase-subtitle">Данные и БД (Supabase)</div>
+          </div>
+          <span class="badge badge-todo">Не начато</span>
+        </div>
+        <div class="phase-progress"><div class="phase-progress-fill" style="width:0%"></div></div>
+        <ul class="task-list">
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Спроектировать схему Postgres: companies, portfolio_projects, leads, user_profile_extra</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Написать миграции и seed-скрипт, перенести 17 компаний и портфолио из COS</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Настроить Supabase Storage bucket для фото, перенести файлы из images/</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Настроить RLS-политики (публичное чтение, запись только service role)</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Подключить Supabase client (server/browser), сгенерировать типы</span></li>
+        </ul>
+        <div class="phase-footer">0 из 5 задач выполнено</div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-head">
+          <div>
+            <div class="phase-name">Фаза 3</div>
+            <div class="phase-subtitle">Аутентификация и профиль (Clerk SDK)</div>
+          </div>
+          <span class="badge badge-todo">Не начато</span>
+        </div>
+        <div class="phase-progress"><div class="phase-progress-fill" style="width:0%"></div></div>
+        <ul class="task-list">
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Перейти с CDN-скрипта clerk.browser.js на пакет @clerk/nextjs</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Защитить /profile через Clerk middleware</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Настроить Clerk webhook → синхронизация в user_profile_extra (Supabase)</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Реализовать обновление профиля через защищённый Route Handler</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Перепроверить смену пароля через Clerk Backend SDK</span></li>
+        </ul>
+        <div class="phase-footer">0 из 5 задач выполнено</div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-head">
+          <div>
+            <div class="phase-name">Фаза 4</div>
+            <div class="phase-subtitle">Формы и лиды</div>
+          </div>
+          <span class="badge badge-todo">Не начато</span>
+        </div>
+        <div class="phase-progress"><div class="phase-progress-fill" style="width:0%"></div></div>
+        <ul class="task-list">
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Сохранить Web3Forms как основной канал писем на info@usholding.kz</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Добавить дублирующую запись заявки в таблицу leads (Supabase)</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Добавить серверную валидацию (zod) и rate-limit по IP</span></li>
+        </ul>
+        <div class="phase-footer">0 из 3 задач выполнено</div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-head">
+          <div>
+            <div class="phase-name">Фаза 5</div>
+            <div class="phase-subtitle">SEO, производительность и надёжность</div>
+          </div>
+          <span class="badge badge-todo">Не начато</span>
+        </div>
+        <div class="phase-progress"><div class="phase-progress-fill" style="width:0%"></div></div>
+        <ul class="task-list">
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Добавить robots.txt, app/sitemap.ts, manifest.json</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Добавить meta description, Open Graph/Twitter Card, JSON-LD Organization</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Добиться бюджета Core Web Vitals (LCP < 2.5s, CLS < 0.1, INP < 200ms)</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Подключить Lighthouse CI в GitHub Actions с порогом производительности</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Подключить Sentry для отслеживания ошибок на проде</span></li>
+        </ul>
+        <div class="phase-footer">0 из 5 задач выполнено</div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-head">
+          <div>
+            <div class="phase-name">Фаза 6</div>
+            <div class="phase-subtitle">Тесты и CI/CD</div>
+          </div>
+          <span class="badge badge-todo">Не начато</span>
+        </div>
+        <div class="phase-progress"><div class="phase-progress-fill" style="width:0%"></div></div>
+        <ul class="task-list">
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Настроить Vitest для unit-тестов</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Настроить Playwright для smoke e2e (главная, логин, форма, профиль)</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Настроить GitHub Actions: lint + typecheck + unit + e2e на каждый PR</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Включить Netlify Deploy Preview на PR</span></li>
+        </ul>
+        <div class="phase-footer">0 из 4 задач выполнено</div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-head">
+          <div>
+            <div class="phase-name">Фаза 7</div>
+            <div class="phase-subtitle">Админ-панель</div>
+          </div>
+          <span class="badge badge-todo">Не начато</span>
+        </div>
+        <div class="phase-progress"><div class="phase-progress-fill" style="width:0%"></div></div>
+        <ul class="task-list">
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Защищённый раздел /admin (доступ только роли admin)</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">CRUD для portfolio_projects с загрузкой фото в Supabase Storage</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">CRUD для карточек companies (описание, услуги, теги)</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Просмотр и управление статусом заявок leads</span></li>
+        </ul>
+        <div class="phase-footer">0 из 4 задач выполнено</div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-head">
+          <div>
+            <div class="phase-name">Фаза 8</div>
+            <div class="phase-subtitle">Запуск и пост-релиз</div>
+          </div>
+          <span class="badge badge-todo">Не начато</span>
+        </div>
+        <div class="phase-progress"><div class="phase-progress-fill" style="width:0%"></div></div>
+        <ul class="task-list">
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Финальное визуальное сравнение старой и новой версии</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Netlify Deploy Preview → ручная проверка → мердж rebuild → main → прод</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Проверить домен usholding.kz и clerk.usholding.kz после релиза</span></li>
+        <li class="task "><span class="task-icon todo">○</span><span class="task-text">Решить судьбу заброшенной ветки cloudflare/workers-autoconfig</span></li>
+        </ul>
+        <div class="phase-footer">0 из 4 задач выполнено</div>
+      </div>
+  </div>
+
+  <footer>
+    Репозиторий: <a href="https://github.com/KAZmake/usholding-site" target="_blank">KAZmake/usholding-site</a>
+    &nbsp;·&nbsp; ветка rebuild &nbsp;·&nbsp; план — ROADMAP.md
+  </footer>
+</div>
+</body>
+</html>
