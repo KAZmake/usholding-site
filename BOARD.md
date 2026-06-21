@@ -3,7 +3,7 @@
 ## Active work
 | Agent   | Task | Status | Started |
 |---------|------|--------|---------|
-| (пусто) | —    | idle   | —       |
+| orchestrator | Фаза 0 | in progress | 2026-06-21 |
 
 ## Decisions
 <!-- Ключевые технические решения -->
@@ -18,4 +18,4 @@
 <!-- Что блокирует работу -->
 
 ## Completed today
-<!-- Что завершено -->
+- Задача 0.1: Создать проект Next.js 15 (App Router, TS strict, Tailwind CSS v4) — Next.js 15.5.19, React 19, src/ layout
