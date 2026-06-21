@@ -48,6 +48,7 @@ export interface Database {
           sort_order?: number;
           updated_at?: string;
         };
+        Relationships: [];
       };
       portfolio_projects: {
         Row: {
@@ -91,6 +92,7 @@ export interface Database {
           sort_order?: number;
           updated_at?: string;
         };
+        Relationships: [];
       };
       leads: {
         Row: {
@@ -122,6 +124,7 @@ export interface Database {
           status?: 'new' | 'in_progress' | 'closed';
           updated_at?: string;
         };
+        Relationships: [];
       };
       user_profile_extra: {
         Row: {
@@ -150,7 +153,10 @@ export interface Database {
           department?: string | null;
           updated_at?: string;
         };
+        Relationships: [];
       };
     };
+    Views: Record<string, never>;
+    Functions: Record<string, never>;
   };
 }

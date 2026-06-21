@@ -3,7 +3,7 @@
 ## Active work
 | Agent   | Task | Status | Started |
 |---------|------|--------|---------|
-| orchestrator | Фазы 0-2 завершены, переход к Фазе 3 | in progress | 2026-06-21 |
+| orchestrator | Фазы 0-3 завершены, переход к Фазе 4 | in progress | 2026-06-21 |
 
 ## Decisions
 <!-- Ключевые технические решения -->
@@ -34,3 +34,8 @@
 - Задача 2.3: Storage bucket `media` (public read, service_role write)
 - Задача 2.4: RLS-политики для всех таблиц
 - Задача 2.5: Supabase client (server/browser) + TypeScript типы
+- Задача 3.1: @clerk/nextjs установлен, ClerkProvider в layout
+- Задача 3.2: Clerk middleware защищает /profile
+- Задача 3.3: Webhook handler (user.created/updated → user_profile_extra)
+- Задача 3.4: Route Handler GET/PUT /api/profile с серверной проверкой сессии
+- Задача 3.5: Route Handler PUT /api/profile/password с русскими сообщениями об ошибках

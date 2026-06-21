@@ -32,11 +32,11 @@
 - [x] Задача 2.5: Подключить Supabase client (отдельные клиенты для server components и browser), сгенерировать типы (`supabase gen types typescript`)
 
 ## Фаза 3: Аутентификация и профиль (Clerk SDK)
-- [ ] Задача 3.1: Перейти с CDN-скрипта `clerk.browser.js` (без версии, `@latest`) на пакет `@clerk/nextjs` — `<ClerkProvider>`, middleware, серверный `auth()`
-- [ ] Задача 3.2: Защитить `/profile` через Clerk middleware вместо текущего client-side `showProfile()`/`showMain()` переключения видимости
-- [ ] Задача 3.3: Настроить Clerk webhook (`user.created`/`user.updated`) → синхронизация в таблицу `user_profile_extra` (Supabase) вместо хранения `phone/position/dept` в `unsafeMetadata`, которое сейчас редактируется напрямую из браузера без проверки сервером
-- [ ] Задача 3.4: Реализовать обновление профиля через защищённый Route Handler `app/api/profile/route.ts` с проверкой сессии на сервере
-- [ ] Задача 3.5: Перепроверить смену пароля через `@clerk/nextjs` Backend SDK, сохранить текущую логику сообщений об ошибках (рус. тексты)
+- [x] Задача 3.1: Перейти с CDN-скрипта `clerk.browser.js` (без версии, `@latest`) на пакет `@clerk/nextjs` — `<ClerkProvider>`, middleware, серверный `auth()`
+- [x] Задача 3.2: Защитить `/profile` через Clerk middleware вместо текущего client-side `showProfile()`/`showMain()` переключения видимости
+- [x] Задача 3.3: Настроить Clerk webhook (`user.created`/`user.updated`) → синхронизация в таблицу `user_profile_extra` (Supabase) вместо хранения `phone/position/dept` в `unsafeMetadata`, которое сейчас редактируется напрямую из браузера без проверки сервером
+- [x] Задача 3.4: Реализовать обновление профиля через защищённый Route Handler `app/api/profile/route.ts` с проверкой сессии на сервере
+- [x] Задача 3.5: Перепроверить смену пароля через `@clerk/nextjs` Backend SDK, сохранить текущую логику сообщений об ошибках (рус. тексты)
 
 ## Фаза 4: Формы и лиды
 - [ ] Задача 4.1: Сохранить Web3Forms как основной канал писем на `info@usholding.kz` (форма `#contactForm`, ключ из `access_key`)
