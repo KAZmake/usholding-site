@@ -20,3 +20,4 @@
 ## Completed today
 - Задача 0.1: Создать проект Next.js 15 (App Router, TS strict, Tailwind CSS v4) — Next.js 15.5.19, React 19, src/ layout
 - Задача 0.2: Перенести статику в public/, настроить app/favicon.ico и app/icon.png
+- Задача 0.3: ESLint 9 (flat config) + Prettier + prettier-plugin-tailwindcss + Husky pre-commit + lint-staged — lint, format:check, typecheck все проходят
