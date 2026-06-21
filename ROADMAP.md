@@ -20,9 +20,9 @@
 - [x] Задача 1.1: Перенести CSS-переменные (`--navy`, `--orange`, `--gray` и т.д.) из инлайн `<style>` в `tailwind.config.ts` (`theme.extend.colors`) и `app/globals.css`
 - [x] Задача 1.2: Собрать компоненты: `Nav`, `Hero`, `About`, `CompanyCard`, `CompanyModal`, `PortfolioCard`, `WhySection`, `ContactForm`, `Footer`, `UserMenu`
 - [x] Задача 1.3: Перенести секции `hero/about/companies/portfolio/why/contact` 1:1 по содержанию, копирайтингу и вёрстке — визуальной регрессии быть не должно
-- [ ] Задача 1.4: Заменить инлайн base64-SVG плейсхолдеры портфолио на реальные фото через `next/image`
-- [ ] Задача 1.5: Все изображения → `next/image` с явными `width/height`, `sizes`, `priority` для hero-изображений — устранить текущие ~2 МБ незжатых JPG на первом экране (`astana.jpg` 825 КБ, `start1.jpg` 262 КБ, `start2.jpg` 203 КБ и т.д.)
-- [ ] Задача 1.6: Убрать мёртвый CSS `.reveal`/`.reveal.visible` (сейчас оба правила идентичны и не дают эффекта) — либо реализовать анимацию появления через `IntersectionObserver`, либо удалить класс
+- [x] Задача 1.4: Заменить инлайн base64-SVG плейсхолдеры портфолио на реальные фото через `next/image`
+- [x] Задача 1.5: Все изображения → `next/image` с явными `width/height`, `sizes`, `priority` для hero-изображений — устранить текущие ~2 МБ незжатых JPG на первом экране (`astana.jpg` 825 КБ, `start1.jpg` 262 КБ, `start2.jpg` 203 КБ и т.д.)
+- [x] Задача 1.6: Убрать мёртвый CSS `.reveal`/`.reveal.visible` (сейчас оба правила идентичны и не дают эффекта) — либо реализовать анимацию появления через `IntersectionObserver`, либо удалить класс
 
 ## Фаза 2: Данные и БД (Supabase)
 - [ ] Задача 2.1: Спроектировать схему Postgres: `companies` (17 записей), `portfolio_projects`, `leads`, `user_profile_extra`

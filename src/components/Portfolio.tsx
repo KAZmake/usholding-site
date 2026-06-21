@@ -61,8 +61,8 @@ export function Portfolio() {
         }}
         className="portfolio-grid"
       >
-        {portfolioProjects.map((project) => (
-          <PortfolioCard key={project.id} project={project} />
+        {portfolioProjects.map((project, index) => (
+          <PortfolioCard key={project.id} project={project} index={index} />
         ))}
       </div>
 

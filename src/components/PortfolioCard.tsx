@@ -1,10 +1,11 @@
+import Image from 'next/image';
 import type { PortfolioProject } from '@/data/portfolio';
 
 interface PortfolioCardProps {
   project: PortfolioProject;
+  index: number;
 }
 
-// Gradient placeholder colors per project index (replacing base64 SVG placeholders from original)
 const placeholderGradients = [
   'linear-gradient(135deg,#122952 0%,#1B3A6B 100%)',
   'linear-gradient(135deg,#1B3A6B 0%,#234987 100%)',
@@ -14,18 +15,8 @@ const placeholderGradients = [
   'linear-gradient(135deg,#2E5FA3 0%,#234987 100%)',
 ];
 
-const projectIndexMap: Record<string, number> = {
-  azhar: 0,
-  'prime-office': 1,
-  'logistics-complex': 2,
-  'apartments-design': 3,
-  'mfk-central': 4,
-  'new-city': 5,
-};
-
-export function PortfolioCard({ project }: PortfolioCardProps) {
-  const gradientIndex = projectIndexMap[project.id] ?? 0;
-  const gradient = placeholderGradients[gradientIndex];
+export function PortfolioCard({ project, index }: PortfolioCardProps) {
+  const gradient = placeholderGradients[index % placeholderGradients.length];
 
   return (
     <div
@@ -39,7 +30,6 @@ export function PortfolioCard({ project }: PortfolioCardProps) {
         cursor: 'pointer',
       }}
     >
-      {/* Image / placeholder */}
       <div
         style={{
           height: 200,
@@ -47,33 +37,42 @@ export function PortfolioCard({ project }: PortfolioCardProps) {
           position: 'relative',
         }}
       >
-        {/* Gradient placeholder (original used base64 SVG — replaced with CSS gradient) */}
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            background: gradient,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            transition: 'transform .4s',
-          }}
-          className="pcard-placeholder"
-          aria-label={project.imageAlt}
-        >
+        {project.imageSrc ? (
+          <Image
+            src={project.imageSrc}
+            alt={project.imageAlt}
+            fill
+            style={{ objectFit: 'cover', transition: 'transform .4s' }}
+            sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
+            className="pcard-img"
+          />
+        ) : (
           <div
             style={{
-              textAlign: 'center',
-              color: 'rgba(255,255,255,0.7)',
-              fontSize: 13,
-              fontWeight: 600,
+              width: '100%',
+              height: '100%',
+              background: gradient,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'transform .4s',
             }}
+            className="pcard-img"
+            aria-label={project.imageAlt}
           >
-            {project.title}
+            <div
+              style={{
+                textAlign: 'center',
+                color: 'rgba(255,255,255,0.7)',
+                fontSize: 13,
+                fontWeight: 600,
+              }}
+            >
+              {project.title}
+            </div>
           </div>
-        </div>
+        )}
 
-        {/* Category tag */}
         <div
           style={{
             position: 'absolute',
@@ -85,13 +84,13 @@ export function PortfolioCard({ project }: PortfolioCardProps) {
             borderRadius: 20,
             fontSize: 11,
             fontWeight: 700,
+            zIndex: 1,
           }}
         >
           {project.tag}
         </div>
       </div>
 
-      {/* Card body */}
       <div style={{ padding: 20 }}>
         <div
           style={{
@@ -123,7 +122,7 @@ export function PortfolioCard({ project }: PortfolioCardProps) {
           transform: translateY(-5px) !important;
           box-shadow: var(--shadow-lg) !important;
         }
-        .pcard-item:hover .pcard-placeholder {
+        .pcard-item:hover .pcard-img {
           transform: scale(1.05) !important;
         }
       `}</style>

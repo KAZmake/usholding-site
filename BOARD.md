@@ -3,7 +3,7 @@
 ## Active work
 | Agent   | Task | Status | Started |
 |---------|------|--------|---------|
-| orchestrator | Фаза 0 завершена, переход к Фазе 1 | in progress | 2026-06-21 |
+| orchestrator | Фазы 0-1 завершены, переход к Фазе 2 | in progress | 2026-06-21 |
 
 ## Decisions
 <!-- Ключевые технические решения -->
@@ -26,3 +26,6 @@
 - Задача 0.6: Удалена functions/api/update-profile.js (орфанный Cloudflare код)
 - Задача 1.1: CSS-переменные перенесены в Tailwind v4 @theme + Google Fonts (Raleway, Playfair Display)
 - Задача 1.2+1.3: 12 компонентов + data files; все 17 компаний, 6 портфолио, все секции перенесены 1:1
+- Задача 1.4: PortfolioCard использует next/image (gradient fallback для отсутствующих фото)
+- Задача 1.5: Все изображения через next/image с fill/sizes/priority
+- Задача 1.6: .reveal CSS не перенесён (dead code eliminated)
