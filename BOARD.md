@@ -3,7 +3,7 @@
 ## Active work
 | Agent   | Task | Status | Started |
 |---------|------|--------|---------|
-| orchestrator | Фазы 0-1 завершены, переход к Фазе 2 | in progress | 2026-06-21 |
+| orchestrator | Фазы 0-2 завершены, переход к Фазе 3 | in progress | 2026-06-21 |
 
 ## Decisions
 <!-- Ключевые технические решения -->
@@ -29,3 +29,8 @@
 - Задача 1.4: PortfolioCard использует next/image (gradient fallback для отсутствующих фото)
 - Задача 1.5: Все изображения через next/image с fill/sizes/priority
 - Задача 1.6: .reveal CSS не перенесён (dead code eliminated)
+- Задача 2.1: Схема Postgres (4 таблицы: companies, portfolio_projects, leads, user_profile_extra)
+- Задача 2.2: Seed-скрипт (17 компаний + 6 портфолио проектов)
+- Задача 2.3: Storage bucket `media` (public read, service_role write)
+- Задача 2.4: RLS-политики для всех таблиц
+- Задача 2.5: Supabase client (server/browser) + TypeScript типы

@@ -25,11 +25,11 @@
 - [x] Задача 1.6: Убрать мёртвый CSS `.reveal`/`.reveal.visible` (сейчас оба правила идентичны и не дают эффекта) — либо реализовать анимацию появления через `IntersectionObserver`, либо удалить класс
 
 ## Фаза 2: Данные и БД (Supabase)
-- [ ] Задача 2.1: Спроектировать схему Postgres: `companies` (17 записей), `portfolio_projects`, `leads`, `user_profile_extra`
-- [ ] Задача 2.2: Написать миграции (Supabase CLI) + seed-скрипт, перенести 17 компаний из JS-объекта `COS` и 6 портфолио-проектов из текущего `index.html` без потери данных
-- [ ] Задача 2.3: Настроить Supabase Storage bucket для фото портфолио/компаний, перенести текущие файлы из `images/`
-- [ ] Задача 2.4: Настроить RLS-политики: публичное чтение `companies`/`portfolio_projects`, запись только через service role (серверные Route Handlers)
-- [ ] Задача 2.5: Подключить Supabase client (отдельные клиенты для server components и browser), сгенерировать типы (`supabase gen types typescript`)
+- [x] Задача 2.1: Спроектировать схему Postgres: `companies` (17 записей), `portfolio_projects`, `leads`, `user_profile_extra`
+- [x] Задача 2.2: Написать миграции (Supabase CLI) + seed-скрипт, перенести 17 компаний из JS-объекта `COS` и 6 портфолио-проектов из текущего `index.html` без потери данных
+- [x] Задача 2.3: Настроить Supabase Storage bucket для фото портфолио/компаний, перенести текущие файлы из `images/`
+- [x] Задача 2.4: Настроить RLS-политики: публичное чтение `companies`/`portfolio_projects`, запись только через service role (серверные Route Handlers)
+- [x] Задача 2.5: Подключить Supabase client (отдельные клиенты для server components и browser), сгенерировать типы (`supabase gen types typescript`)
 
 ## Фаза 3: Аутентификация и профиль (Clerk SDK)
 - [ ] Задача 3.1: Перейти с CDN-скрипта `clerk.browser.js` (без версии, `@latest`) на пакет `@clerk/nextjs` — `<ClerkProvider>`, middleware, серверный `auth()`
