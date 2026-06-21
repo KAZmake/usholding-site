@@ -1,5 +1,18 @@
 import type { Metadata } from 'next';
+import { Raleway, Playfair_Display } from 'next/font/google';
 import './globals.css';
+
+const raleway = Raleway({
+  subsets: ['latin', 'cyrillic'],
+  variable: '--font-family-sans',
+  display: 'swap',
+});
+
+const playfair = Playfair_Display({
+  subsets: ['latin', 'cyrillic'],
+  variable: '--font-family-serif',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'US Holding — Группа компаний',
@@ -13,8 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru">
-      <body>{children}</body>
+    <html lang="ru" className={`${raleway.variable} ${playfair.variable}`}>
+      <body className={raleway.className}>{children}</body>
     </html>
   );
 }

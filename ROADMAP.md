@@ -17,7 +17,7 @@
 - [x] Задача 0.6: Удалить орфанную `functions/api/update-profile.js` (формат Cloudflare Pages Functions, не выполняется на Netlify; функциональность переписывается заново в Фазе 3 как Next.js Route Handler)
 
 ## Фаза 1: Дизайн-система и вёрстка
-- [ ] Задача 1.1: Перенести CSS-переменные (`--navy`, `--orange`, `--gray` и т.д.) из инлайн `<style>` в `tailwind.config.ts` (`theme.extend.colors`) и `app/globals.css`
+- [x] Задача 1.1: Перенести CSS-переменные (`--navy`, `--orange`, `--gray` и т.д.) из инлайн `<style>` в `tailwind.config.ts` (`theme.extend.colors`) и `app/globals.css`
 - [ ] Задача 1.2: Собрать компоненты: `Nav`, `Hero`, `About`, `CompanyCard`, `CompanyModal`, `PortfolioCard`, `WhySection`, `ContactForm`, `Footer`, `UserMenu`
 - [ ] Задача 1.3: Перенести секции `hero/about/companies/portfolio/why/contact` 1:1 по содержанию, копирайтингу и вёрстке — визуальной регрессии быть не должно
 - [ ] Задача 1.4: Заменить инлайн base64-SVG плейсхолдеры портфолио на реальные фото через `next/image`
