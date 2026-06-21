@@ -24,3 +24,5 @@
 - Задача 0.4: .env.example со всеми переменными (Clerk, Supabase, Web3Forms)
 - Задача 0.5: netlify.toml → Next.js Runtime (`npm run build`, @netlify/plugin-nextjs)
 - Задача 0.6: Удалена functions/api/update-profile.js (орфанный Cloudflare код)
+- Задача 1.1: CSS-переменные перенесены в Tailwind v4 @theme + Google Fonts (Raleway, Playfair Display)
+- Задача 1.2+1.3: 12 компонентов + data files; все 17 компаний, 6 портфолио, все секции перенесены 1:1

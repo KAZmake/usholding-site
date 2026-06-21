@@ -1,32 +1,25 @@
-import Image from 'next/image';
+import { Nav } from '@/components/Nav';
+import { Hero } from '@/components/Hero';
+import { About } from '@/components/About';
+import { Companies } from '@/components/Companies';
+import { Portfolio } from '@/components/Portfolio';
+import { WhySection } from '@/components/WhySection';
+import { ContactForm } from '@/components/ContactForm';
+import { Footer } from '@/components/Footer';
 
 export default function Home() {
   return (
-    <main
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#1a2e4a',
-        color: '#ffffff',
-        fontFamily: 'sans-serif',
-        textAlign: 'center',
-        padding: '2rem',
-      }}
-    >
-      <Image
-        src="/logo/US.png"
-        alt="US Holding"
-        width={80}
-        height={80}
-        style={{ marginBottom: '1.5rem' }}
-      />
-      <h1 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '0.5rem' }}>US Holding</h1>
-      <p style={{ fontSize: '1.125rem', color: '#94a3b8', maxWidth: 480 }}>
-        Новая версия сайта в разработке. Скоро здесь будет полноценный сайт группы компаний.
-      </p>
-    </main>
+    <>
+      <Nav />
+      <main>
+        <Hero />
+        <About />
+        <Companies />
+        <Portfolio />
+        <WhySection />
+        <ContactForm />
+      </main>
+      <Footer />
+    </>
   );
 }
