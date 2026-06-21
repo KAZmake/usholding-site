@@ -10,7 +10,7 @@
 
 ## Фаза 0: Аудит и инфраструктура репозитория
 - [x] Задача 0.1: Создать в ветке `rebuild` проект Next.js 15 (App Router, TypeScript strict, Tailwind CSS) рядом с текущими файлами, не удаляя прод `index.html`
-- [ ] Задача 0.2: Перенести статику (`images/`, `logo/`, `favicon.ico`) в `public/`; настроить иконки через Next.js (`app/icon.png` из `logo/US.png`, `app/favicon.ico` из существующего `favicon.ico` — он есть в репозитории, но сейчас ни на что не подключён)
+- [x] Задача 0.2: Перенести статику (`images/`, `logo/`, `favicon.ico`) в `public/`; настроить иконки через Next.js (`app/icon.png` из `logo/US.png`, `app/favicon.ico` из существующего `favicon.ico` — он есть в репозитории, но сейчас ни на что не подключён)
 - [ ] Задача 0.3: Настроить ESLint + Prettier + TypeScript strict + Husky pre-commit (lint + typecheck перед коммитом)
 - [ ] Задача 0.4: Создать `.env.example` со всеми переменными: `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `CLERK_SECRET_KEY`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `WEB3FORMS_ACCESS_KEY`
 - [ ] Задача 0.5: Настроить `netlify.toml` под Next.js Runtime (`@netlify/plugin-nextjs`): build command `next build`, без `publish = "."`

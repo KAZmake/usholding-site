@@ -19,3 +19,4 @@
 
 ## Completed today
 - Задача 0.1: Создать проект Next.js 15 (App Router, TS strict, Tailwind CSS v4) — Next.js 15.5.19, React 19, src/ layout
+- Задача 0.2: Перенести статику в public/, настроить app/favicon.ico и app/icon.png
