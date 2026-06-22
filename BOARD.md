@@ -3,7 +3,7 @@
 ## Active work
 | Agent   | Task | Status | Started |
 |---------|------|--------|---------|
-| orchestrator | Фазы 0-6 завершены, переход к Фазе 7 | in progress | 2026-06-21 |
+| orchestrator | Фазы 0-7 завершены, переход к Фазе 8 (финал) | in progress | 2026-06-21 |
 
 ## Decisions
 <!-- Ключевые технические решения -->
@@ -55,3 +55,7 @@
 - Задача 6.2: Playwright e2e (4 smoke tests, chromium)
 - Задача 6.3: GitHub Actions CI (lint + typecheck + test)
 - Задача 6.4: Netlify Deploy Preview задокументирован
+- Задача 7.1: /admin защищён через Clerk (admin role check в layout)
+- Задача 7.2: CRUD portfolio_projects (pages + API routes + zod validation)
+- Задача 7.3: CRUD companies (pages + API routes)
+- Задача 7.4: Leads table с pagination, status filter, inline status change
