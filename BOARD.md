@@ -18,8 +18,6 @@
 <!-- Что блокирует работу. Каждый блокер пересылается в Telegram-бота —
      пиши конкретно: что нужно сделать человеку и что вернуть в ответ. -->
 
-### ⚠️ ВНИМАНИЕ: Telegram-relay не работает (сетевой таймаут к api.telegram.org). Эти блокеры НЕ были доставлены в Telegram. Проверьте этот файл и ответьте в секции "Human Input" ниже.
-
 ### Фаза 8 — переход на Hetzner (замена Netlify)
 
 **Задача 8.1 выполнена** — конфиги для Hetzner подготовлены (ecosystem.config.cjs, deploy.sh, nginx/usholding.conf).
@@ -58,6 +56,13 @@ pm2 save
 **8.5 — Ветка cloudflare/workers-autoconfig:**
 Рекомендация: удалить. Команда: `git push origin --delete cloudflare/workers-autoconfig`
 Верни: «Удалить» или «Оставить».
+
+### GitHub PAT — нужен scope `workflow`
+Файлы `.github/workflows/ci.yml` и `lighthouse.yml` не удаётся запушить — текущий PAT не имеет scope `workflow`. Нужно обновить токен на github.com → Settings → Developer settings → PAT → добавить галочку `workflow`. После этого я смогу запушить CI-файлы.
+
+### Supabase — ключи обрезались
+Supabase URL получен: `https://wdzvjbppqmuldghyante.supabase.co`
+Anon key и service_role key обрезались при отправке (JWT неполные). Нужно переслать полностью из Supabase Dashboard → Settings → API → Project API keys.
 
 ## Human Input
 - 2026-06-27 08:49: Привет! Какие задачи сейчас в очереди?
