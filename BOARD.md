@@ -60,9 +60,10 @@ pm2 save
 ### GitHub PAT — нужен scope `workflow`
 Файлы `.github/workflows/ci.yml` и `lighthouse.yml` не удаётся запушить — текущий PAT не имеет scope `workflow`. Нужно обновить токен на github.com → Settings → Developer settings → PAT → добавить галочку `workflow`. После этого я смогу запушить CI-файлы.
 
-### Supabase — ключи обрезались
-Supabase URL получен: `https://wdzvjbppqmuldghyante.supabase.co`
-Anon key и service_role key обрезались при отправке (JWT неполные). Нужно переслать полностью из Supabase Dashboard → Settings → API → Project API keys.
+### Supabase — нужен пароль БД для создания таблиц
+Ключи API получены и .env.local обновлён. Для автоматического создания таблиц нужен пароль БД Postgres:
+Supabase Dashboard → Settings → Database → Connection info → Password.
+Альтернатива: запустить `supabase/combined_setup.sql` вручную в Supabase Dashboard → SQL Editor.
 
 ## Human Input
 - 2026-06-27 08:49: Привет! Какие задачи сейчас в очереди?
