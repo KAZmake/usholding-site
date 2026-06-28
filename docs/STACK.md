@@ -60,24 +60,29 @@
 - Microsoft 365 / Outlook Web (`outlook.office.com`) — без изменений, просто внешняя ссылка. Бэкенд-интеграция (например, отправка уведомлений о заявках через Microsoft Graph API) — в backlog, не в текущем скоупе
 
 ## Инфраструктура
-- Хостинг: **Netlify**, Next.js Runtime (`@netlify/plugin-nextjs`) — SSR/ISR/Route Handlers из коробки, без миграции на Vercel
-- DNS: Cloudflare (`usholding.kz`) — без изменений
-- CI/CD: GitHub Actions (lint + typecheck + unit + e2e на PR) + Netlify Deploy Preview
+- Хостинг: **Hetzner VPS** (62.238.25.150) — Next.js standalone + PM2 (process manager) + nginx (reverse proxy)
+- DNS: Cloudflare (`usholding.kz`) — A-запись на Hetzner IP, Proxy mode (оранжевое облако) для SSL/CDN
+- CI/CD: GitHub Actions (lint + typecheck + unit + e2e на PR) + деплой через `deploy.sh` на сервере
 - Мониторинг: Sentry (ошибки), Lighthouse CI (регрессии производительности)
 - Репозиторий: `github.com/KAZmake/usholding-site`, рабочая ветка `rebuild`
 
-## netlify.toml (целевая версия после Фазы 0)
+## Деплой на Hetzner
 
-```toml
-[build]
-  command = "next build"
+```bash
+# Первоначальная настройка (от root):
+sudo apt install -y nginx
+sudo npm install -g pm2
+sudo cp nginx/usholding.conf /etc/nginx/sites-available/usholding
+sudo ln -s /etc/nginx/sites-available/usholding /etc/nginx/sites-enabled/
+sudo nginx -t && sudo systemctl reload nginx
+pm2 startup  # следовать инструкциям
 
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+# Деплой (от claude или CI):
+./deploy.sh
 ```
 
-> Текущий `netlify.toml` (`publish = "."`, `skip_processing = false`) подходит
-> только для статического `index.html` и должен быть заменён в Задаче 0.5.
+> `netlify.toml` оставлен минимальным — обслуживает только legacy `index.html`
+> из `main` до момента переключения DNS на Hetzner.
 
 ## Структура репозитория (целевая, после Фазы 1)
 
@@ -113,8 +118,11 @@ usholding-site/
 │   ├── settings.json
 │   └── agents/
 ├── CLAUDE.md, ROADMAP.md, BOARD.md
-├── netlify.toml
-└── functions/                   — удаляется в Задаче 0.6 (орфанный код)
+├── ecosystem.config.cjs          — PM2 конфигурация
+├── deploy.sh                     — скрипт деплоя на Hetzner
+├── nginx/usholding.conf          — nginx reverse proxy конфиг
+├── netlify.toml                  — legacy, только для статического index.html
+└── logs/                         — PM2 логи (gitignored)
 ```
 
 ## Зависимости между фазами

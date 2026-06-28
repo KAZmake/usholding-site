@@ -3,7 +3,7 @@
 ## Active work
 | Agent   | Task | Status | Started |
 |---------|------|--------|---------|
-| orchestrator | Фаза 8: ожидание ручной проверки владельцем (8.1-8.4) | blocked | 2026-06-27 |
+| orchestrator | Фаза 8: переход на Hetzner — конфиги готовы, ждём установку nginx+PM2 (8.2-8.5) | blocked | 2026-06-28 |
 
 ## Decisions
 <!-- Ключевые технические решения -->
@@ -20,35 +20,44 @@
 
 ### ⚠️ ВНИМАНИЕ: Telegram-relay не работает (сетевой таймаут к api.telegram.org). Эти блокеры НЕ были доставлены в Telegram. Проверьте этот файл и ответьте в секции "Human Input" ниже.
 
-### Фаза 8 — требуется ручная проверка и действия владельца
+### Фаза 8 — переход на Hetzner (замена Netlify)
 
-**Все 38 из 38 технических задач (Фазы 0-7) выполнены.** Осталось 4 задачи Фазы 8 — все требуют действий человека.
+**Задача 8.1 выполнена** — конфиги для Hetzner подготовлены (ecosystem.config.cjs, deploy.sh, nginx/usholding.conf).
 
-**8.1 — Визуальное сравнение:**
-Открой Netlify Deploy Preview (ссылка появится при создании PR `rebuild → main`) и сравни с текущим https://usholding.kz:
-- Все 6 секций (hero, about, companies, portfolio, why, contact)
-- Все 17 модалок компаний (клик → текст, услуги, теги)
-- Мобильная адаптивность
-- Если есть визуальные расхождения — опиши их здесь, я исправлю.
-Верни: «Визуально ОК» или список расхождений.
+**8.2 — Установка nginx + PM2 (требует sudo):**
+Выполни от root на сервере:
+```bash
+sudo apt install -y nginx
+sudo npm install -g pm2
+sudo cp /home/claude/usholding-site/nginx/usholding.conf /etc/nginx/sites-available/usholding
+sudo ln -s /etc/nginx/sites-available/usholding /etc/nginx/sites-enabled/
+sudo rm -f /etc/nginx/sites-enabled/default
+sudo nginx -t && sudo systemctl reload nginx
+```
+Затем от пользователя claude:
+```bash
+cd /home/claude/usholding-site
+cp .env.example .env.local  # заполнить реальные ключи
+./deploy.sh
+pm2 save
+```
+Верни: «nginx+PM2 установлены» или описание ошибки.
 
-**8.2 — Мердж в main:**
-После подтверждения 8.1:
-1. Создай PR `rebuild → main` на GitHub
-2. Убедись что Netlify Deploy Preview работает
-3. Нажми Merge
-Верни: «Замержено» или ссылку на PR.
+**8.3 — Cloudflare DNS:**
+В панели Cloudflare (usholding.kz):
+1. A-запись `@` → `62.238.25.150` (Proxy: ON — оранжевое облако)
+2. A-запись `www` → `62.238.25.150` (Proxy: ON)
+3. Проверить CNAME `clerk` → по-прежнему указывает на Clerk
+4. SSL/TLS → Full (strict) если есть сертификат, или Full
+Верни: «DNS настроен» или вопросы.
 
-**8.3 — Проверка домена после релиза:**
-После мерджа проверь:
-- https://usholding.kz загружается (новая Next.js версия)
-- https://clerk.usholding.kz работает (Clerk auth)
-- Форма обратной связи отправляет (Web3Forms + Supabase)
-Верни: «Домен ОК» или описание проблемы.
+**8.4 — Финальная проверка:**
+После 8.2 + 8.3 проверь https://usholding.kz — все секции, модалки, формы, авторизация.
+Верни: «Сайт работает» или список проблем.
 
-**8.4 — Ветка cloudflare/workers-autoconfig:**
-Эта ветка содержит старую историю разработки (Netlify Identity → Clerk CDN → Cloudflare Workers для профиля). Вся функциональность уже переписана в `rebuild` (Next.js Route Handlers). Рекомендация: **удалить ветку**. Команда: `git push origin --delete cloudflare/workers-autoconfig`
-Верни: «Удалить» или «Оставить (причина)».
+**8.5 — Ветка cloudflare/workers-autoconfig:**
+Рекомендация: удалить. Команда: `git push origin --delete cloudflare/workers-autoconfig`
+Верни: «Удалить» или «Оставить».
 
 ## Human Input
 - 2026-06-27 08:49: Привет! Какие задачи сейчас в очереди?
