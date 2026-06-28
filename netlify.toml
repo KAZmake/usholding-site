@@ -1,8 +1,6 @@
+# Legacy: serves only the static index.html from main branch.
+# New Next.js app deploys on Hetzner (nginx + PM2).
+# This file will be removed after DNS migration to Hetzner is complete.
 [build]
+  command = "echo 'Static site, no build needed'"
   publish = "."
-
-[build.processing]
-  skip_processing = false
-
-[build.processing.html]
-  pretty_print = false

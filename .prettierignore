@@ -1,0 +1,14 @@
+node_modules
+.next
+public
+*.md
+e2e/
+# Production site files — do not touch
+index.html
+images/
+logo/
+favicon.ico
+# Cloudflare function (orphaned, kept for safety)
+functions/
+# Project dashboard (GitHub Pages)
+docs/
